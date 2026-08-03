@@ -1,4 +1,11 @@
-/* CSS Custom Properties / Color Palette */
+/* Reset & Base Setup */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
 :root {
     --bg-main: #0b0f19;
     --bg-card: #151c2e;
@@ -10,6 +17,13 @@
     --border-color: rgba(255, 255, 255, 0.08);
 }
 
+body {
+    background-color: var(--bg-main) !important;
+    color: var(--text-primary) !important;
+    padding-bottom: 90px;
+    min-height: 100vh;
+}
+
 /* Glassmorphism Top Header */
 .top-header {
     position: sticky;
@@ -19,18 +33,25 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 1.5rem;
-    background: rgba(11, 15, 25, 0.8);
-    backdrop-filter: blur(12px); /* Glass blur effect */
+    background: rgba(21, 28, 46, 0.85);
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-color);
 }
 
+.logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
 .home-btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 6px;
     color: var(--accent);
     text-decoration: none;
     font-weight: 600;
+    font-size: 0.85rem;
     padding: 0.4rem 0.9rem;
     border: 1px solid var(--accent);
     border-radius: 20px;
@@ -44,7 +65,75 @@
     box-shadow: 0 0 15px var(--accent);
 }
 
-/* Card Improvements with Subtle Glow & Hover Lift */
+/* Layout Container */
+.container {
+    padding: 2rem 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.page-title {
+    color: var(--accent);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-section h1 {
+    font-size: 2.2rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.quote {
+    font-style: italic;
+    color: var(--text-secondary);
+    max-width: 450px;
+    margin: 0 auto 2rem auto;
+    border-left: 3px solid var(--accent);
+    padding-left: 1rem;
+    text-align: left;
+    line-height: 1.5;
+}
+
+.resume-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--accent);
+    color: var(--bg-main);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: 0 4px 15px var(--accent-glow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resume-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--accent);
+}
+
+/* Cards & Badges */
 .card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -60,7 +149,9 @@
     box-shadow: 0 10px 25px -5px var(--accent-glow);
 }
 
-/* Modern Tech Badges */
+.card h3 { color: var(--text-primary); margin-bottom: 0.4rem; }
+.card p { color: var(--text-secondary); line-height: 1.5; }
+
 .badges {
     display: flex;
     flex-wrap: wrap;
@@ -78,33 +169,31 @@
     border: 1px solid rgba(56, 189, 248, 0.2);
 }
 
-/* Sleek Floating Bottom Mobile Menu */
+/* Floating Bottom Navigation Bar */
 .bottom-swipe-nav {
     position: fixed;
-    bottom: 12px;
+    bottom: 16px;
     left: 50%;
     transform: translateX(-50%);
     width: 92%;
     max-width: 500px;
-    background: rgba(21, 28, 46, 0.85);
+    background: rgba(21, 28, 46, 0.9);
     backdrop-filter: blur(16px);
     border: 1px solid var(--border-color);
     border-radius: 30px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
     z-index: 1000;
 }
 
 .swipe-container {
     display: flex;
     overflow-x: auto;
-    padding: 0.6rem;
+    padding: 0.5rem;
     gap: 6px;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
 }
 
-.swipe-container::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
-}
+.swipe-container::-webkit-scrollbar { display: none; }
 
 .nav-item {
     flex: 0 0 auto;
@@ -118,8 +207,7 @@
 }
 
 .nav-item.active, .nav-item:hover {
-    color: var(--text-primary);
     background: var(--accent);
-    color: #000;
+    color: var(--bg-main) !important;
     font-weight: 600;
 }
