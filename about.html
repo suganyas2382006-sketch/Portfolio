@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About me | Suganya S</title>
-    <link rel="stylesheet" href="css/style.css">
+    <!-- Fixed stylesheet path -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="top-header">
@@ -14,8 +15,8 @@
 
     <main class="container">
         <div class="profile-container">
-    <img src="assets/profile.png" alt="Suganya S" class="profile-img">
-</div>
+            <img src="assets/profile.png" alt="Suganya S" class="profile-img">
+        </div>
 
         <h2 class="page-title">About Me</h2>
         <div class="card">
@@ -25,6 +26,8 @@
 
     <nav class="bottom-swipe-nav">
         <div class="swipe-container">
+            <!-- Added missing Home link -->
+            <a href="index.html" class="nav-item">Home</a>
             <a href="about.html" class="nav-item active">About</a>
             <a href="education.html" class="nav-item">Education</a>
             <a href="skills.html" class="nav-item">Skills</a>
@@ -34,5 +37,8 @@
             <a href="contact.html" class="nav-item">Contact</a>
         </div>
     </nav>
+
+    <!-- Added script reference for bottom nav active highlight/scrolling -->
+    <script src="script.js"></script>
 </body>
 </html>
