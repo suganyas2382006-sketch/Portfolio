@@ -1,0 +1,125 @@
+/* CSS Custom Properties / Color Palette */
+:root {
+    --bg-main: #0b0f19;
+    --bg-card: #151c2e;
+    --bg-card-hover: #1e293b;
+    --accent: #38bdf8;
+    --accent-glow: rgba(56, 189, 248, 0.25);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Glassmorphism Top Header */
+.top-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: rgba(11, 15, 25, 0.8);
+    backdrop-filter: blur(12px); /* Glass blur effect */
+    border-bottom: 1px solid var(--border-color);
+}
+
+.home-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--accent);
+    border-radius: 20px;
+    box-shadow: 0 0 10px var(--accent-glow);
+    transition: all 0.3s ease;
+}
+
+.home-btn:hover {
+    background-color: var(--accent);
+    color: var(--bg-main);
+    box-shadow: 0 0 15px var(--accent);
+}
+
+/* Card Improvements with Subtle Glow & Hover Lift */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 10px 25px -5px var(--accent-glow);
+}
+
+/* Modern Tech Badges */
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 0.8rem;
+}
+
+.tech-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--accent);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+/* Sleek Floating Bottom Mobile Menu */
+.bottom-swipe-nav {
+    position: fixed;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92%;
+    max-width: 500px;
+    background: rgba(21, 28, 46, 0.85);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.swipe-container {
+    display: flex;
+    overflow-x: auto;
+    padding: 0.6rem;
+    gap: 6px;
+    scrollbar-width: none; /* Firefox */
+}
+
+.swipe-container::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.nav-item {
+    flex: 0 0 auto;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.nav-item.active, .nav-item:hover {
+    color: var(--text-primary);
+    background: var(--accent);
+    color: #000;
+    font-weight: 600;
+}
