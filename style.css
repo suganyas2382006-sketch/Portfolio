@@ -1,4 +1,3 @@
-/* Reset & Base Setup */
 * {
     margin: 0;
     padding: 0;
@@ -9,11 +8,10 @@
 body {
     background-color: #0f172a;
     color: #f8fafc;
-    padding-bottom: 80px; /* Space for bottom nav */
+    padding-bottom: 80px;
     min-height: 100vh;
 }
 
-/* Header & Top Home Button */
 .top-header {
     position: sticky;
     top: 0;
@@ -50,7 +48,6 @@ body {
     background-color: rgba(56, 189, 248, 0.15);
 }
 
-/* Page Layout Container */
 .container {
     padding: 2rem 1.5rem;
     max-width: 800px;
@@ -65,7 +62,6 @@ body {
     padding-bottom: 0.5rem;
 }
 
-/* Hero Section Specifics */
 .hero-section {
     min-height: 70vh;
     display: flex;
@@ -89,7 +85,6 @@ body {
     border-radius: 8px; text-decoration: none; font-weight: 700;
 }
 
-/* Item List Cards (Projects, Certifications, Hackathons, Education) */
 .card {
     background-color: #1e293b;
     border-radius: 8px;
@@ -99,10 +94,10 @@ body {
 }
 
 .card h3 { color: #ffffff; margin-bottom: 0.4rem; }
-.card .date { color: #38bdf8; font-size: 0.85rem; margin-bottom: 0.5rem; }
+.card .sub-tag { color: #38bdf8; font-size: 0.85rem; margin-bottom: 0.5rem; font-weight: 600; }
 .card p { color: #94a3b8; line-height: 1.5; }
+.card ul { margin-left: 1.2rem; color: #94a3b8; line-height: 1.6; }
 
-/* Fixed Bottom Horizontal Swipe Navigation */
 .bottom-swipe-nav {
     position: fixed;
     bottom: 0;
