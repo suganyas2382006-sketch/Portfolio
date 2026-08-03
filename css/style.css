@@ -1,3 +1,21 @@
+/* Remove default tap overlay boxes on mobile across all clickable elements */
+*, 
+*::before, 
+*::after,
+a, 
+button, 
+input, 
+select, 
+textarea, 
+.nav-item, 
+.contact-icon-btn, 
+.resume-btn, 
+.home-btn {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none;
+    outline: none;
+}
+
 /* Reset & Base Setup */
 * {
     margin: 0;
