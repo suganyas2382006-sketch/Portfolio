@@ -222,40 +222,50 @@ body {
     bottom: 16px;
     left: 50%;
     transform: translateX(-50%);
-    width: 92%;
+    width: calc(100% - 32px); /* Flexible width with padding */
     max-width: 500px;
-    background: rgba(21, 28, 46, 0.9);
+    background: rgba(21, 28, 46, 0.95);
     backdrop-filter: blur(16px);
     border: 1px solid var(--border-color);
     border-radius: 30px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     z-index: 1000;
 }
 
 .swipe-container {
     display: flex;
     overflow-x: auto;
-    padding: 0.5rem;
+    padding: 6px 8px;
     gap: 6px;
-    scrollbar-width: none;
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    align-items: center;
 }
 
-.swipe-container::-webkit-scrollbar { display: none; }
+.swipe-container::-webkit-scrollbar { 
+    display: none; /* Hide scrollbar for Chrome/Safari */
+}
 
 .nav-item {
-    flex: 0 0 auto;
+    flex: 0 0 auto; /* Keeps items from shrinking */
     color: var(--text-secondary);
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 500;
-    transition: all 0.2s ease;
+    white-space: nowrap; /* Prevents text breaking into two lines */
+    transition: all 0.25 ease;
 }
 
-.nav-item.active, .nav-item:hover {
+.nav-item.active, 
+.nav-item:hover {
     background: var(--accent);
     color: var(--bg-main) !important;
     font-weight: 600;
 }
 
+/* Page body spacing fix so navigation doesn't block content */
+body {
+    padding-bottom: 100px !important; 
+}
