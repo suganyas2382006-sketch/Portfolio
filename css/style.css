@@ -238,7 +238,7 @@ body {
 }
 
 .quote {
-    font-style: italic;
+    font-style: normal;
     color: var(--text-secondary);
     max-width: 450px;
     margin: 0 auto 2rem auto;
