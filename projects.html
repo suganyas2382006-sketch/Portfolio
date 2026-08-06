@@ -4,80 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Suganya S</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="script.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <canvas id="bg-canvas"></canvas>
-    <header class="top-header">
-        <div class="logo">Suganya S</div>
-        <a href="index.html" class="home-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a>
-    </header>
 
-    <main class="container">
-        <h2 class="page-title">Projects</h2>
+<main>
+    <div class="content-wrapper">
+        <h2 class="page-title">Featured <span>Work</span></h2>
+        
+        <div class="card-grid">
+            
+            <!-- Project 1 -->
+            <article class="anim-card">
+                <div class="project-meta">
+                    <span class="role">AI Developer</span>
+                    <span class="tech">Deep Learning • Flask</span>
+                </div>
+                <h3>NeuroVision AI</h3>
+                <p>An AI-powered web application for brain tumor detection and severity analysis from MRI scans, utilizing Explainable AI (Grad-CAM) to provide visual insights.</p>
+                <div class="card-actions">
+                    <a href="https://github.com/SUGANYAS2382006-SKETCH" target="_blank" class="btn btn-secondary">Source Code</a>
+                </div>
+            </article>
 
-        <!-- AI & Deep Learning Projects -->
-        <div class="card">
-            <h3>NeuroVision AI</h3>
-            <p class="sub-tag">AI & Healthcare Application</p>
-            <p>An AI-powered web application designed for brain tumor detection and severity analysis from MRI scans, utilizing Flask, Deep Learning models, and Explainable AI (Grad-CAM) to provide precise prediction results alongside visual insights.</p>
+            <!-- Project 2 -->
+            <article class="anim-card">
+                <div class="project-meta">
+                    <span class="role">Data Analyst</span>
+                    <span class="tech">Python • Algorithms</span>
+                </div>
+                <h3>OptiVoyage</h3>
+                <p>An AI-powered marine route optimization system that analyzes weather and ocean data to help ships find safe, fuel-efficient paths using pathfinding algorithms.</p>
+                <div class="card-actions">
+                    <a href="https://github.com/SUGANYAS2382006-SKETCH" target="_blank" class="btn btn-secondary">Source Code</a>
+                </div>
+            </article>
+
+            <!-- Project 3 -->
+            <article class="anim-card">
+                <div class="project-meta">
+                    <span class="role">Researcher</span>
+                    <span class="tech">Research • Eco-Tech</span>
+                </div>
+                <h3>Artificial Tree</h3>
+                <p>Formulated a conceptual framework for an eco-friendly tech system centered on ecological data mapping to support future green infrastructure modeling.</p>
+                <div class="card-actions">
+                    <a href="https://github.com/SUGANYAS2382006-SKETCH" target="_blank" class="btn btn-secondary">Source Code</a>
+                </div>
+            </article>
+
+             <!-- Project 4 -->
+            <article class="anim-card">
+                <div class="project-meta">
+                    <span class="role">Data Analyst</span>
+                    <span class="tech">Power BI • Excel</span>
+                </div>
+                <h3>Sales & Revenue Dashboard</h3>
+                <p>Developed an interactive dashboard to analyze sales performance, revenue trends, and KPIs using data visualization techniques for better decision-making.</p>
+                <div class="card-actions">
+                    <a href="https://github.com/SUGANYAS2382006-SKETCH" target="_blank" class="btn btn-secondary">Source Code</a>
+                </div>
+            </article>
+
         </div>
+    </div>
+</main>
 
-        <div class="card">
-            <h3>OPTIVOYAGE</h3>
-            <p class="sub-tag">Role: Data Analyst / System Developer</p>
-            <p>OptiVoyage is an AI-powered marine route optimization system that helps ships find the safest and most fuel-efficient path by analyzing weather, ocean conditions, and navigation data. It uses pathfinding algorithms to reduce travel time, fuel consumption, and operational costs while improving maritime safety.</p>
-        </div>
+<nav class="floating-nav-wrapper">
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="projects.html" class="active">Projects</a></li>
+        <li><a href="certifications.html">Certifications</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
 
-        <div class="card">
-            <h3>GESTURE INTO TEXT</h3>
-            <p class="sub-tag">Computer Vision Project</p>
-            <p>Developed a real-time gesture recognition model that translates hand gestures into readable text to improve accessible communication using computer vision techniques[span_2](start_span)[span_2](end_span).</p>
-        </div>
-
-        <div class="card">
-            <h3>ARTIFICIAL TREE</h3>
-            <p class="sub-tag">Eco-Friendly Tech Framework</p>
-            <p>Formulated a conceptual framework for an eco-friendly tech system centered on ecological data and environmental sustainability. Conducted baseline research and architectural mapping to support future green infrastructure modeling.</p>
-        </div>
-
-        <!-- Data Analytics & Automation Projects (Thiranex) -->
-        <div class="card">
-            <h3>Sales & Revenue Analysis Dashboard</h3>
-            <p class="sub-tag">Tech: Power BI / Excel / CSV Data Analysis</p>
-            <p>Built an interactive dashboard to analyze sales and revenue data. Imported datasets, visualized KPIs like total sales and revenue trends, and applied interactive filters and slicers for business insight generation.</p>
-        </div>
-
-        <div class="card">
-            <h3>Customer Segmentation Project</h3>
-            <p class="sub-tag">Tech: Python (scikit-learn) / Power BI</p>
-            <p>Segmented customer profiles based on behavior and demographics. Performed clustering analysis to evaluate purchase patterns, identify customer preferences, and derive targeted marketing insights.</p>
-        </div>
-
-        <div class="card">
-            <h3>Predictive Analytics Using Historical Data</h3>
-            <p class="sub-tag">Tech: Python / Regression & Time-Series Models</p>
-            <p>Developed a predictive model to forecast future market trends. Cleaned and preprocessed historical datasets, applied regression and time-series modeling, and evaluated prediction accuracy for data-driven forecasting.</p>
-        </div>
-
-        <div class="card">
-            <h3>Data Cleaning & Reporting Automation</h3>
-            <p class="sub-tag">Tech: Python / Excel / Power BI</p>
-            <p>Automated data preprocessing and reporting workflows. Implemented logic to handle missing values, eliminate duplicates, resolve inconsistent data, and automatically generate visual summary reports.</p>
-        </div>
-    </main>
-
-    <nav class="bottom-swipe-nav">
-        <div class="swipe-container">
-            <a href="about.html" class="nav-item">About</a>
-            <a href="education.html" class="nav-item">Education</a>
-            <a href="skills.html" class="nav-item">Skills</a>
-            <a href="projects.html" class="nav-item active">Projects</a>
-            <a href="certification.html" class="nav-item">Certifications</a>
-            <a href="hackathon.html" class="nav-item">Hackathons</a>
-            <a href="contact.html" class="nav-item">Contact</a>
-        </div>
-    </nav>
+<script src="script.js"></script>
 </body>
 </html>
