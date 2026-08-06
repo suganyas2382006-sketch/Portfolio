@@ -25,14 +25,14 @@ textarea,
 }
 
 :root {
-  --bg-main: #121218;
-  --bg-card: #1C1C26;
-  --bg-card-hover: #272736;
-  --accent: #8b5cf6;
-  --accent-glow: rgba(139, 92, 246, 0.3);
-  --text-primary: #f8fafc;
-  --text-secondary: #a0a0b0;
-  --border-color: rgba(255, 255, 255, 0.08);
+  --bg-main: #eae6f8;
+  --bg-card: #f5f3fc;
+  --bg-card-hover: #ffffff;
+  --accent: #7c3aed;
+  --accent-glow: rgba(124, 58, 237, 0.2);
+  --text-primary: #1e1b2e;
+  --text-secondary: #5b556e;
+  --border-color: rgba(124, 58, 237, 0.12);
 }
 
 
