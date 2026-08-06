@@ -25,15 +25,16 @@ textarea,
 }
 
 :root {
-    --bg-main: #0b0f19;
-    --bg-card: #151c2e;
-    --bg-card-hover: #1e293b;
-    --accent: #38bdf8;
-    --accent-glow: rgba(56, 189, 248, 0.25);
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --border-color: rgba(255, 255, 255, 0.08);
+  --bg-main: #121212;
+  --bg-card: #1E1E2E;
+  --bg-card-hover: #252538;
+  --accent: #10b981;
+  --accent-glow: rgba(16, 185, 129, 0.25);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.08);
 }
+
 
 body {
     background-color: var(--bg-main) !important;
