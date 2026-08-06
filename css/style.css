@@ -26,14 +26,14 @@ textarea,
 }
 
 :root {
-  --bg-main: #eae6f8;
-  --bg-card: #f5f3fc;
-  --bg-card-hover: #ffffff;
-  --accent: #7c3aed;
-  --accent-glow: rgba(124, 58, 237, 0.25);
-  --text-primary: #1e1b2e;
-  --text-secondary: #5b556e;
-  --border-color: rgba(124, 58, 237, 0.15);
+    --bg-main: #eae6f8;
+    --bg-card: #f5f3fc;
+    --bg-card-hover: #ffffff;
+    --accent: #7c3aed;
+    --accent-glow: rgba(124, 58, 237, 0.25);
+    --text-primary: #1e1b2e;
+    --text-secondary: #5b556e;
+    --border-color: rgba(124, 58, 237, 0.15);
 }
 
 body {
@@ -377,22 +377,23 @@ body {
 .swipe-container {
     display: flex;
     overflow-x: auto;
-    padding: 6px 10px;
-    gap: 6px;
-    scrollbar-width: none;
+    padding: 6px 16px;
+    gap: 8px;
+    scrollbar-width: none; /* Firefox */
     -webkit-overflow-scrolling: touch;
     align-items: center;
+    scroll-behavior: smooth;
 }
 
 .swipe-container::-webkit-scrollbar { 
-    display: none; 
+    display: none; /* Chrome, Safari, Opera */
 }
 
 .nav-item {
     flex: 0 0 auto;
     color: var(--text-secondary);
     text-decoration: none;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1.1rem;
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 500;
