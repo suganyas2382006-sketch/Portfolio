@@ -1,20 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
   /* --------------------------------------------------
-     1. Navigation Bar (Auto-Centering & Swipe Control)
+     1. Bottom Navigation Bar (Auto-Centering & Drag)
   -------------------------------------------------- */
   const navContainer = document.querySelector('.swipe-container');
   const navItems = document.querySelectorAll('.nav-item');
-  const activeTab = document.querySelector('.nav-item.active');
 
-  // Auto-center active tab on initial page load
-  if (activeTab && navContainer) {
+  function centerActiveTab(smooth = false) {
+    const activeTab = document.querySelector('.nav-item.active');
+    if (!activeTab || !navContainer) return;
+
     const containerWidth = navContainer.offsetWidth;
     const tabOffset = activeTab.offsetLeft;
     const tabWidth = activeTab.offsetWidth;
-    navContainer.scrollLeft = tabOffset - (containerWidth / 2) + (tabWidth / 2);
+
+    // Prevent scrolling if layout dimensions are not calculated yet
+    if (containerWidth === 0 || tabWidth === 0) return;
+
+    const targetScroll = tabOffset - (containerWidth / 2) + (tabWidth / 2);
+
+    navContainer.scrollTo({
+      left: targetScroll,
+      behavior: smooth ? 'smooth' : 'auto'
+    });
   }
 
-  // Mouse drag-to-scroll controls
+  // Trigger centering across initial render passes
+  centerActiveTab(false);
+  window.addEventListener('load', () => centerActiveTab(false));
+  setTimeout(() => centerActiveTab(false), 80);
+  setTimeout(() => centerActiveTab(false), 300);
+
+  // Recenter on window resize
+  window.addEventListener('resize', () => centerActiveTab(false));
+
+  // Desktop Mouse Drag-to-Scroll Controls
   let isDown = false;
   let isDragging = false;
   let startX;
@@ -41,40 +60,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Smooth centering on click
+  // Prevent drag action from opening links on mouse release
   navItems.forEach(item => {
     item.addEventListener('click', function (e) {
       if (isDragging) {
         e.preventDefault();
-        return;
       }
-      navItems.forEach(nav => nav.classList.remove('active'));
-      this.classList.add('active');
-      this.scrollIntoView({
-        behavior: 'smooth',
-        inline: 'center',
-        block: 'nearest'
-      });
     });
   });
 
   /* --------------------------------------------------
-     2. Interactive Node Canvas Background
+     2. Interactive High-DPI Node Canvas Background
   -------------------------------------------------- */
   const canvas = document.getElementById('bg-canvas');
   if (!canvas) return;
 
   const ctx = canvas.getContext('2d');
-  let width = (canvas.width = window.innerWidth);
-  let height = (canvas.height = window.innerHeight);
+  let width, height, dpr;
 
-  window.addEventListener('resize', () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-  });
+  function resizeCanvas() {
+    dpr = window.devicePixelRatio || 1;
+    width = window.innerWidth;
+    height = window.innerHeight;
 
-  // Cursor & touch position tracking
-  const pointer = { x: null, y: null, radius: 150 };
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+
+    ctx.scale(dpr, dpr);
+  }
+
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  // Pointer position tracking
+  const pointer = { x: null, y: null, radius: 140 };
 
   function updatePointer(e) {
     const x = e.touches ? e.touches[0].clientX : e.clientX;
@@ -84,20 +105,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   window.addEventListener('mousemove', updatePointer);
-  window.addEventListener('touchmove', updatePointer);
+  window.addEventListener('touchmove', updatePointer, { passive: true });
   window.addEventListener('mouseleave', () => { pointer.x = null; pointer.y = null; });
   window.addEventListener('touchend', () => { pointer.x = null; pointer.y = null; });
 
-  // Particle creation
+  // Particles setup
   const particles = [];
-  const particleCount = Math.floor((width * height) / 15000);
+  const particleCount = Math.floor((width * height) / 16000);
 
   class Particle {
     constructor() {
       this.x = Math.random() * width;
       this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * 0.8;
-      this.vy = (Math.random() - 0.5) * 0.8;
+      this.vx = (Math.random() - 0.5) * 0.7;
+      this.vy = (Math.random() - 0.5) * 0.7;
       this.radius = 2;
     }
 
@@ -121,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     particles.push(new Particle());
   }
 
-  // Canvas animation loop
+  // Animation Loop
   function animate() {
     ctx.clearRect(0, 0, width, height);
 
@@ -129,29 +150,29 @@ document.addEventListener('DOMContentLoaded', () => {
       p.update();
       p.draw();
 
-      // Draw connection lines between nearby particles
+      // Inter-particle line connections
       for (let j = index + 1; j < particles.length; j++) {
         const p2 = particles[j];
         const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
 
-        if (dist < 100) {
+        if (dist < 95) {
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(124, 58, 237, ${0.15 * (1 - dist / 100)})`;
+          ctx.strokeStyle = `rgba(124, 58, 237, ${0.14 * (1 - dist / 95)})`;
           ctx.lineWidth = 1;
           ctx.stroke();
         }
       }
 
-      // Draw connection lines to active cursor/touch point
+      // Cursor/Touch line connections
       if (pointer.x !== null && pointer.y !== null) {
         const pDist = Math.hypot(p.x - pointer.x, p.y - pointer.y);
         if (pDist < pointer.radius) {
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(pointer.x, pointer.y);
-          ctx.strokeStyle = `rgba(124, 58, 237, ${0.4 * (1 - pDist / pointer.radius)})`;
+          ctx.strokeStyle = `rgba(124, 58, 237, ${0.35 * (1 - pDist / pointer.radius)})`;
           ctx.lineWidth = 1.2;
           ctx.stroke();
         }
