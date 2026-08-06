@@ -25,13 +25,13 @@ textarea,
 }
 
 :root {
-  --bg-main: #121212;
-  --bg-card: #1E1E2E;
-  --bg-card-hover: #252538;
-  --accent: #10b981;
-  --accent-glow: rgba(16, 185, 129, 0.25);
+  --bg-main: #121218;
+  --bg-card: #1C1C26;
+  --bg-card-hover: #272736;
+  --accent: #8b5cf6;
+  --accent-glow: rgba(139, 92, 246, 0.3);
   --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
+  --text-secondary: #a0a0b0;
   --border-color: rgba(255, 255, 255, 0.08);
 }
 
