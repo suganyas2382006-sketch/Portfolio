@@ -1,9 +1,70 @@
 document.addEventListener('DOMContentLoaded', () => {
+  /* --------------------------------------------------
+     1. Navigation Bar (Auto-Centering & Swipe Control)
+  -------------------------------------------------- */
+  const navContainer = document.querySelector('.swipe-container');
+  const navItems = document.querySelectorAll('.nav-item');
+  const activeTab = document.querySelector('.nav-item.active');
+
+  // Auto-center active tab on initial page load
+  if (activeTab && navContainer) {
+    const containerWidth = navContainer.offsetWidth;
+    const tabOffset = activeTab.offsetLeft;
+    const tabWidth = activeTab.offsetWidth;
+    navContainer.scrollLeft = tabOffset - (containerWidth / 2) + (tabWidth / 2);
+  }
+
+  // Mouse drag-to-scroll controls
+  let isDown = false;
+  let isDragging = false;
+  let startX;
+  let scrollLeft;
+
+  if (navContainer) {
+    navContainer.addEventListener('mousedown', (e) => {
+      isDown = true;
+      isDragging = false;
+      startX = e.pageX - navContainer.offsetLeft;
+      scrollLeft = navContainer.scrollLeft;
+    });
+
+    navContainer.addEventListener('mouseleave', () => isDown = false);
+    navContainer.addEventListener('mouseup', () => isDown = false);
+
+    navContainer.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - navContainer.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      if (Math.abs(walk) > 5) isDragging = true;
+      navContainer.scrollLeft = scrollLeft - walk;
+    });
+  }
+
+  // Smooth centering on click
+  navItems.forEach(item => {
+    item.addEventListener('click', function (e) {
+      if (isDragging) {
+        e.preventDefault();
+        return;
+      }
+      navItems.forEach(nav => nav.classList.remove('active'));
+      this.classList.add('active');
+      this.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest'
+      });
+    });
+  });
+
+  /* --------------------------------------------------
+     2. Interactive Node Canvas Background
+  -------------------------------------------------- */
   const canvas = document.getElementById('bg-canvas');
   if (!canvas) return;
-  
-  const ctx = canvas.getContext('2d');
 
+  const ctx = canvas.getContext('2d');
   let width = (canvas.width = window.innerWidth);
   let height = (canvas.height = window.innerHeight);
 
@@ -12,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     height = canvas.height = window.innerHeight;
   });
 
-  // Interactive position state (mouse & touch)
+  // Cursor & touch position tracking
   const pointer = { x: null, y: null, radius: 150 };
 
   function updatePointer(e) {
@@ -27,9 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('mouseleave', () => { pointer.x = null; pointer.y = null; });
   window.addEventListener('touchend', () => { pointer.x = null; pointer.y = null; });
 
-  // Node / Particle setup
+  // Particle creation
   const particles = [];
-  const particleCount = Math.floor((width * height) / 15000); // Responsive density
+  const particleCount = Math.floor((width * height) / 15000);
 
   class Particle {
     constructor() {
@@ -51,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(124, 58, 237, 0.6)'; // Lavender accent node
+      ctx.fillStyle = 'rgba(124, 58, 237, 0.6)';
       ctx.fill();
     }
   }
@@ -60,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     particles.push(new Particle());
   }
 
-  // Animation loop
+  // Canvas animation loop
   function animate() {
     ctx.clearRect(0, 0, width, height);
 
@@ -68,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
       p.update();
       p.draw();
 
-      // Connect nodes to each other
+      // Draw connection lines between nearby particles
       for (let j = index + 1; j < particles.length; j++) {
         const p2 = particles[j];
         const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
@@ -83,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Connect nodes to touch / cursor position
+      // Draw connection lines to active cursor/touch point
       if (pointer.x !== null && pointer.y !== null) {
         const pDist = Math.hypot(p.x - pointer.x, p.y - pointer.y);
         if (pDist < pointer.radius) {
