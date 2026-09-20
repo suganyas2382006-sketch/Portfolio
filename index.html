@@ -158,10 +158,18 @@
             z-index: 9997; opacity: 0; transition: opacity 0.5s ease; mix-blend-mode: screen;
         }  
 
+        /* DASHBOARD HEADER: Desktop Left-to-Right layout */
         .dashboard-container {  
-            max-width: 1200px; margin: 0 auto; width: 100%; padding: 3rem 2rem 2rem;  
-            display: flex; justify-content: space-between; align-items: flex-end;  
-            position: relative; gap: 2rem; z-index: 10;
+            max-width: 1200px; 
+            margin: 0 auto; 
+            width: 100%; 
+            padding: 3rem 2rem 2rem;  
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-end;  
+            position: relative; 
+            gap: 2rem; 
+            z-index: 10;
         }  
 
         .dashboard-container::after {
@@ -169,15 +177,15 @@
             height: 1px; background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
         }
 
-        /* 4:5 RECTANGULAR PROFILE CARD (DESKTOP) */
         .profile-brand-cluster {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 2.2rem;
             flex: 1;
             min-width: 0;
         }
 
+        /* 1ST ON DESKTOP: Photo Card */
         .profile-rect-card {
             position: relative;
             width: 110px;
@@ -246,7 +254,12 @@
             transform: scale(1.06);
         }
 
-        .profile-info { position: relative; flex: 1; min-width: 0; }
+        /* 2ND ON DESKTOP: Profile Info Center */
+        .profile-info { 
+            position: relative; 
+            flex: 1; 
+            min-width: 0; 
+        }
 
         .profile-info h1 {  
             font-family: var(--font-heading); 
@@ -334,27 +347,51 @@
             word-spacing: 2px;
         }
 
-        /* NAVIGATION PILL (DESKTOP) */
+        /* 3RD ON DESKTOP: Horizontal Navigation Pill on Right */
         .vertical-nav {  
-            display: flex; gap: 6px; position: relative; flex-shrink: 0;
-            background: rgba(15, 12, 5, 0.7); padding: 6px; border-radius: 100px;
-            border: 1px solid rgba(212, 175, 55, 0.15); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            display: flex; 
+            gap: 6px; 
+            position: relative; 
+            flex-shrink: 0;
+            background: rgba(15, 12, 5, 0.7); 
+            padding: 6px; 
+            border-radius: 100px;
+            border: 1px solid rgba(212, 175, 55, 0.15); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
         }  
 
         .nav-pill-bg {
-            position: absolute; top: 6px; left: 6px; width: 44px; height: 44px;
-            background: var(--gold-gradient); border-radius: 50%; z-index: 1;
+            position: absolute; 
+            top: 6px; 
+            left: 6px; 
+            width: 44px; 
+            height: 44px;
+            background: var(--gold-gradient); 
+            border-radius: 50%; 
+            z-index: 1;
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
             pointer-events: none;
         }
 
         .nav-btn {  
-            background: transparent; border: none; color: var(--text-muted);  
-            width: 44px; height: 44px; border-radius: 50%; cursor: pointer;  
-            transition: color 0.2s ease, transform 0.2s ease; display: flex; align-items: center; justify-content: center;
-            -webkit-tap-highlight-color: transparent; outline: none; position: relative; z-index: 2;
+            background: transparent; 
+            border: none; 
+            color: var(--text-muted);  
+            width: 44px; 
+            height: 44px; 
+            border-radius: 50%; 
+            cursor: pointer;  
+            transition: color 0.2s ease, transform 0.2s ease; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            -webkit-tap-highlight-color: transparent; 
+            outline: none; 
+            position: relative; 
+            z-index: 2;
         }  
         .nav-btn:focus, .nav-btn:active { outline: none; }
         .nav-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.2s ease; }
@@ -810,13 +847,13 @@
             margin-top: auto; letter-spacing: 0.2em; position: relative; z-index: 10;
         }   
 
-        /* Wrapper used for horizontal mobile layout */
-        .mobile-stage-row {
-            display: contents; /* Seamless on desktop */
+        /* Wrapper that pairs Photo and Nav side-by-side on mobile without interfering with desktop */
+        .mobile-photo-nav-group {
+            display: contents; /* Flattens on desktop so Photo is 1st, Info is 2nd, Nav is 3rd */
         }
 
         /* ==========================================================
-           RESPONSIVE MOBILE VIEW: MATCHED EQUAL HEIGHT (204px)
+           RESPONSIVE MOBILE VIEW (ORDER: INFO 1ST -> [PHOTO + NAV] 2ND)
            ========================================================== */
         @media(max-width: 768px) {
             .dashboard-container { 
@@ -830,14 +867,12 @@
             .dashboard-container::after { left: 1rem; right: 1rem; }
             
             .profile-brand-cluster { 
-                flex-direction: column; 
-                align-items: center; 
-                text-align: center; 
-                gap: 1.2rem; 
-                width: 100%; 
+                display: contents; /* Unrolls flex items so they can be reordered */
             }
 
+            /* 1ST ON MOBILE: Status, Name, Degree */
             .profile-info { 
+                order: 1; 
                 width: 100%; 
                 display: flex; 
                 flex-direction: column; 
@@ -852,8 +887,9 @@
                 text-align: center;
             }
 
-            /* Container holding both elements at equal heights */
-            .mobile-stage-row {
+            /* 2ND ON MOBILE: Photo Card and Nav Pill aligned side-by-side */
+            .mobile-photo-nav-group {
+                order: 2;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -863,14 +899,13 @@
                 margin: 0.4rem 0 0.8rem;
             }
 
-            /* Photo Frame resized to exactly match the 204px height of Nav */
+            /* Both Photo and Nav share equal height (204px) */
             .profile-rect-card { 
                 height: 204px;
-                width: 163px; /* Exact 4:5 ratio for a 204px height */
+                width: 163px; /* 4:5 proportional ratio for 204px height */
                 margin: 0;
             }
 
-            /* Sleek Vertical Navigation Pill matching 204px height */
             .vertical-nav { 
                 display: flex;
                 flex-direction: column; 
@@ -947,6 +982,39 @@
   
 <header class="dashboard-container">  
     <div class="profile-brand-cluster">
+        <!-- WRAPPER: Transparent on desktop, bundles Photo & Nav on mobile -->
+        <div class="mobile-photo-nav-group">
+            <!-- 1ST ON DESKTOP: Photo Card on the left -->
+            <div class="profile-rect-card">
+                <div class="profile-rect-inner">
+                    <img 
+                        src="profile.png" 
+                        alt="Suganya S" 
+                        class="profile-rect-img"
+                        onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 125\' fill=\'%23050505\'%3E%3Crect width=\'100\' height=\'125\' fill=\'%23141004\'/%3E%3Ctext x=\'50\' y=\'68\' font-family=\'sans-serif\' font-size=\'30\' font-weight=\'bold\' fill=\'%23D4AF37\' text-anchor=\'middle\'%3ESS%3C/text%3E%3C/svg%3E';"
+                    >
+                </div>
+            </div>
+
+            <!-- 3RD ON DESKTOP: Horizontal Nav Pill | Beside photo on mobile -->
+            <nav class="vertical-nav" id="main-nav">  
+                <div class="nav-pill-bg" id="nav-pill-bg"></div>
+                <button class="nav-btn active" data-target="page-home" aria-label="Home">
+                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                </button>  
+                <button class="nav-btn" data-target="page-education" aria-label="Education">
+                    <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                </button>  
+                <button class="nav-btn" data-target="page-projects" aria-label="Projects">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                </button>  
+                <button class="nav-btn" data-target="page-connect" aria-label="Connect">
+                    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </button>  
+            </nav>  
+        </div>
+
+        <!-- 2ND ON DESKTOP: Name & Degree Info in the middle -->
         <div class="profile-info">  
             <h3>open to opportunities</h3>
             <h1>SUGANYA S</h1>  
@@ -955,36 +1023,6 @@
                 <span class="degree-text">B.TECH ARTIFICIAL INTELLIGENCE & DATA SCIENCE</span>
             </div>
         </div>  
-    </div>
-
-    <!-- WRAPPER: Side-by-side with equal 204px height on mobile screens -->
-    <div class="mobile-stage-row">
-        <div class="profile-rect-card">
-            <div class="profile-rect-inner">
-                <img 
-                    src="profile.png" 
-                    alt="Suganya S" 
-                    class="profile-rect-img"
-                    onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 125\' fill=\'%23050505\'%3E%3Crect width=\'100\' height=\'125\' fill=\'%23141004\'/%3E%3Ctext x=\'50\' y=\'68\' font-family=\'sans-serif\' font-size=\'30\' font-weight=\'bold\' fill=\'%23D4AF37\' text-anchor=\'middle\'%3ESS%3C/text%3E%3C/svg%3E';"
-                >
-            </div>
-        </div>
-
-        <nav class="vertical-nav" id="main-nav">  
-            <div class="nav-pill-bg" id="nav-pill-bg"></div>
-            <button class="nav-btn active" data-target="page-home" aria-label="Home">
-                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-            </button>  
-            <button class="nav-btn" data-target="page-education" aria-label="Education">
-                <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
-            </button>  
-            <button class="nav-btn" data-target="page-projects" aria-label="Projects">
-                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-            </button>  
-            <button class="nav-btn" data-target="page-connect" aria-label="Connect">
-                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            </button>  
-        </nav>  
     </div>
 </header>  
 
@@ -1099,7 +1137,7 @@
                         <span class="vault-status-pill">PRESENT</span>
                     </div>
                     <h3 class="vault-degree-title">B.Tech Artificial Intelligence & Data Science</h3>
-                    <div class="vault-institution-name">JP College of Engineering (JPCOE), Tenkasi &mdash; Anna University[span_1](start_span)[span_1](end_span)</div>
+                    <div class="vault-institution-name">JP College of Engineering (JPCOE), Tenkasi &mdash; Anna University[span_4](start_span)[span_4](end_span)</div>
                     <p class="vault-desc">Building robust theoretical and practical foundations in advanced neural network architectures, predictive modeling, machine learning pipelines, and scalable data systems.</p>
                 </div>
 
@@ -1650,3 +1688,4 @@
 </script>  
 </body>  
 </html>
+
