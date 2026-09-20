@@ -169,7 +169,7 @@
             height: 1px; background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
         }
 
-        /* 4:5 RECTANGULAR PROFILE CARD */
+        /* 4:5 RECTANGULAR PROFILE CARD (DESKTOP) */
         .profile-brand-cluster {
             display: flex;
             align-items: center;
@@ -334,7 +334,7 @@
             word-spacing: 2px;
         }
 
-        /* NAVIGATION PILL */
+        /* NAVIGATION PILL (DESKTOP) */
         .vertical-nav {  
             display: flex; gap: 6px; position: relative; flex-shrink: 0;
             background: rgba(15, 12, 5, 0.7); padding: 6px; border-radius: 100px;
@@ -810,8 +810,13 @@
             margin-top: auto; letter-spacing: 0.2em; position: relative; z-index: 10;
         }   
 
+        /* Wrapper used for horizontal mobile layout */
+        .mobile-stage-row {
+            display: contents; /* Seamless on desktop */
+        }
+
         /* ==========================================================
-           RESPONSIVE MOBILE VIEW (ORDER: STATUS -> NAME -> PHOTO)
+           RESPONSIVE MOBILE VIEW: MATCHED EQUAL HEIGHT (204px)
            ========================================================== */
         @media(max-width: 768px) {
             .dashboard-container { 
@@ -828,13 +833,11 @@
                 flex-direction: column; 
                 align-items: center; 
                 text-align: center; 
-                gap: 1.4rem; 
-                width: 100%;
+                gap: 1.2rem; 
+                width: 100%; 
             }
 
-            /* ORDER FIX: Info first, then Photo */
             .profile-info { 
-                order: 1; 
                 width: 100%; 
                 display: flex; 
                 flex-direction: column; 
@@ -849,25 +852,55 @@
                 text-align: center;
             }
 
-            .profile-rect-card { 
-                order: 2; 
-                width: 110px; 
+            /* Container holding both elements at equal heights */
+            .mobile-stage-row {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 1.25rem;
+                width: 100%;
+                margin: 0.4rem 0 0.8rem;
             }
 
-            /* Tight, centered navigation pill */
+            /* Photo Frame resized to exactly match the 204px height of Nav */
+            .profile-rect-card { 
+                height: 204px;
+                width: 163px; /* Exact 4:5 ratio for a 204px height */
+                margin: 0;
+            }
+
+            /* Sleek Vertical Navigation Pill matching 204px height */
             .vertical-nav { 
-                margin: 0.6rem auto 0; 
-                width: fit-content;        
-                max-width: 90vw;
-                justify-content: center; 
-                border-radius: 100px; 
+                display: flex;
+                flex-direction: column; 
+                margin: 0; 
+                padding: 6px;
+                width: 52px;
+                height: 204px; /* Exact equal height to photo card */
+                justify-content: space-between;
+                border-radius: 40px; 
+                border: 1px solid rgba(212, 175, 55, 0.25);
+                background: rgba(15, 12, 5, 0.85);
+            }
+
+            .nav-pill-bg {
+                width: 40px;
+                height: 40px;
+                top: 6px;
+                left: 6px;
+            }
+
+            .nav-btn {
+                width: 40px;
+                height: 40px;
             }
 
             .img-style-header { justify-content: center; text-align: center; font-size: 1.1rem; }
             .vault-tabs { gap: 6px; }
             .vault-tab-btn { padding: 0.5rem 1rem; font-size: 0.6rem; letter-spacing: 0.15em; }
             .vault-panel { padding: 1.5rem 1.2rem; }
-            .page-container { padding: 1.5rem 1rem 4rem; width: 100%; overflow: hidden; }
+            .page-container { padding: 1.2rem 1rem 4rem; width: 100%; overflow: hidden; }
             .coverflow-container { height: 380px; width: 100%; }
             .project-card { width: 85vw; height: auto; padding: 1.5rem; }
             .editorial-summary { padding: 1.5rem 1rem; }
@@ -914,7 +947,18 @@
   
 <header class="dashboard-container">  
     <div class="profile-brand-cluster">
-        <!-- 4:5 RECTANGULAR PROFILE FRAME (ORDER 2 ON MOBILE) -->
+        <div class="profile-info">  
+            <h3>open to opportunities</h3>
+            <h1>SUGANYA S</h1>  
+            
+            <div class="header-meta-stack">
+                <span class="degree-text">B.TECH ARTIFICIAL INTELLIGENCE & DATA SCIENCE</span>
+            </div>
+        </div>  
+    </div>
+
+    <!-- WRAPPER: Side-by-side with equal 204px height on mobile screens -->
+    <div class="mobile-stage-row">
         <div class="profile-rect-card">
             <div class="profile-rect-inner">
                 <img 
@@ -926,32 +970,22 @@
             </div>
         </div>
 
-        <!-- PROFILE TEXT (ORDER 1 ON MOBILE) -->
-        <div class="profile-info">  
-            <h3>open to opportunities</h3>
-            <h1>SUGANYA S</h1>  
-            
-            <div class="header-meta-stack">
-                <span class="degree-text">B.TECH ARTIFICIAL INTELLIGENCE & DATA SCIENCE</span>
-            </div>
-        </div>  
+        <nav class="vertical-nav" id="main-nav">  
+            <div class="nav-pill-bg" id="nav-pill-bg"></div>
+            <button class="nav-btn active" data-target="page-home" aria-label="Home">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            </button>  
+            <button class="nav-btn" data-target="page-education" aria-label="Education">
+                <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+            </button>  
+            <button class="nav-btn" data-target="page-projects" aria-label="Projects">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            </button>  
+            <button class="nav-btn" data-target="page-connect" aria-label="Connect">
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </button>  
+        </nav>  
     </div>
-      
-    <nav class="vertical-nav" id="main-nav">  
-        <div class="nav-pill-bg" id="nav-pill-bg"></div>
-        <button class="nav-btn active" data-target="page-home" aria-label="Home">
-            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-        </button>  
-        <button class="nav-btn" data-target="page-education" aria-label="Education">
-            <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
-        </button>  
-        <button class="nav-btn" data-target="page-projects" aria-label="Projects">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-        </button>  
-        <button class="nav-btn" data-target="page-connect" aria-label="Connect">
-            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        </button>  
-    </nav>  
 </header>  
 
 <main class="page-container">
@@ -1065,7 +1099,7 @@
                         <span class="vault-status-pill">PRESENT</span>
                     </div>
                     <h3 class="vault-degree-title">B.Tech Artificial Intelligence & Data Science</h3>
-                    <div class="vault-institution-name">JP College of Engineering (JPCOE), Tenkasi &mdash; Anna University</div>
+                    <div class="vault-institution-name">JP College of Engineering (JPCOE), Tenkasi &mdash; Anna University[span_1](start_span)[span_1](end_span)</div>
                     <p class="vault-desc">Building robust theoretical and practical foundations in advanced neural network architectures, predictive modeling, machine learning pipelines, and scalable data systems.</p>
                 </div>
 
@@ -1291,8 +1325,15 @@
         const navContainer = document.getElementById('main-nav');
         const containerRect = navContainer.getBoundingClientRect();
         const btnRect = activeBtn.getBoundingClientRect();
-        const offsetLeft = btnRect.left - containerRect.left - 6; 
-        navPillBg.style.transform = `translateX(${offsetLeft}px)`;
+        const isMobile = window.innerWidth <= 768;
+
+        if (isMobile) {
+            const offsetTop = btnRect.top - containerRect.top - 6;
+            navPillBg.style.transform = `translateY(${offsetTop}px)`;
+        } else {
+            const offsetLeft = btnRect.left - containerRect.left - 6; 
+            navPillBg.style.transform = `translateX(${offsetLeft}px)`;
+        }
     }
 
     window.addEventListener('load', () => {
