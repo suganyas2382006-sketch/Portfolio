@@ -160,7 +160,7 @@
 
         /* ==========================================================
            DASHBOARD HEADER:
-           Desktop: [Photo + Name Cluster (Left)] <------------> [Nav Pill (Right)]
+           Desktop: [Photo Card (Left)] [Info (Center)] [Nav Pill (Right)]
            ========================================================== */
         .dashboard-container {  
             max-width: 1200px; 
@@ -180,7 +180,6 @@
             height: 1px; background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
         }
 
-        /* Group photo and text together on the left */
         .profile-brand-cluster {
             display: flex;
             align-items: center;
@@ -189,7 +188,6 @@
             min-width: 0;
         }
 
-        /* 1. PHOTO CARD */
         .profile-rect-card {
             position: relative;
             width: 110px;
@@ -258,7 +256,6 @@
             transform: scale(1.06);
         }
 
-        /* 2. PROFILE INFO (Text) */
         .profile-info { 
             position: relative; 
             flex: 1; 
@@ -354,7 +351,6 @@
             word-spacing: 2px;
         }
 
-        /* 3. NAVIGATION PILL (Far Right on Desktop) */
         .vertical-nav {  
             display: flex; 
             gap: 6px; 
@@ -412,7 +408,7 @@
 
         .page {  
             display: none; opacity: 0; transform: translateY(8px);
-            transition: opacity 0.25s ease, transform 0.25s ease;
+            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             width: 100%;
         }  
         .page.active { display: block; opacity: 1; transform: translateY(0); }  
@@ -431,15 +427,14 @@
         }
 
         .reveal-element { 
-            opacity: 0; transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease; 
+            opacity: 0; transform: translateY(14px);
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
         }  
         .reveal-element.visible { opacity: 1; transform: translateY(0); }  
-        .delay-1 { transition-delay: 0.02s; } 
-        .delay-2 { transition-delay: 0.05s; } 
-        .delay-3 { transition-delay: 0.08s; }
+        .delay-1 { transition-delay: 0.05s; } 
+        .delay-2 { transition-delay: 0.12s; } 
+        .delay-3 { transition-delay: 0.18s; }
 
-        /* SKILL PILL CARDS */
         .marquee-container {  
             position: relative; width: 100%; overflow: hidden;  
             display: flex; flex-direction: column; gap: 1.2rem; padding: 1rem 0;  
@@ -481,7 +476,6 @@
             font-weight: 500; color: #F0F0F0; letter-spacing: 0.08em; white-space: nowrap; 
         }  
 
-        /* REPERTOIRE TOGGLE AND DRAWER */
         .repertoire-action-row {
             display: flex;
             justify-content: center;
@@ -679,47 +673,219 @@
             font-weight: 300;
         }
 
-        .holo-vault-container { max-width: 850px; margin: 1.5rem auto; position: relative; width: 100%; }
-        .vault-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; }
-        
-        .vault-tab-btn {
-            background: rgba(15, 12, 5, 0.5); border: 1px solid rgba(212, 175, 55, 0.2);
-            color: var(--text-muted); padding: 0.6rem 1.4rem; border-radius: 30px;
-            font-family: var(--font-code); font-size: 0.65rem; letter-spacing: 0.18em;
-            text-transform: uppercase; cursor: pointer; transition: var(--transition-fast);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); 
-            outline: none; -webkit-tap-highlight-color: transparent; box-shadow: none !important;
+        /* ==========================================================
+           EDUCATION: CLEAN EDITORIAL LAYOUT (LEFT-ALIGNED)
+           ========================================================== */
+        .edu-wrapper {
+            max-width: 860px;
+            margin: 0 auto;
+            position: relative;
+            width: 100%;
         }
-        .vault-tab-btn:hover, .vault-tab-btn:focus, .vault-tab-btn:active { 
-            color: var(--gold-light); border-color: rgba(212, 175, 55, 0.5); background: rgba(212, 175, 55, 0.06); outline: none; box-shadow: none !important;
-        }
-        .vault-tab-btn.active { color: var(--bg-primary); background: var(--gold-gradient); border-color: transparent; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3) !important; font-weight: 600; outline: none; }
 
-        .vault-stage { position: relative; min-height: 280px; width: 100%; }
-        .vault-panel {
-            position: absolute; top: 0; left: 0; width: 100%; background: var(--card-bg);
-            border: 1px solid var(--card-border); border-top: 1px solid var(--card-glass-edge);
-            border-radius: 16px; padding: 2.2rem 2rem; backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px); box-shadow: inset 0 1px 0 rgba(255,223,115,0.08);
-            opacity: 0; visibility: hidden; transform: translateY(10px);
-            transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s;
-            pointer-events: none;
+        .edu-nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 2.5rem;
         }
-        .vault-panel.active { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
-        .vault-panel-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(212, 175, 55, 0.15);
-            flex-wrap: wrap; gap: 8px;
+
+        .edu-tab-btn {
+            background: rgba(15, 12, 5, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            color: var(--text-muted);
+            padding: 0.65rem 1.8rem;
+            border-radius: 30px;
+            font-family: var(--font-code);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(15px);
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
         }
-        .vault-index-tag { font-family: var(--font-code); font-size: 0.65rem; color: var(--gold-primary); letter-spacing: 0.22em; }
-        .vault-status-pill {
-            font-family: var(--font-code); font-size: 0.55rem; color: var(--bg-primary);
-            background: var(--gold-gradient); padding: 0.25rem 0.6rem; border-radius: 4px;
-            letter-spacing: 0.15em; font-weight: 600; box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+
+        .edu-tab-btn:hover {
+            color: var(--gold-light);
+            border-color: rgba(212, 175, 55, 0.5);
+            transform: translateY(-2px);
         }
-        .vault-degree-title { font-family: var(--font-heading); font-size: clamp(1.2rem, 3vw, 1.55rem); font-weight: 300; color: var(--gold-light); margin-bottom: 0.6rem; letter-spacing: -0.01em; line-height: 1.3; }
-        .vault-institution-name { font-size: 0.95rem; color: var(--text-main); font-weight: 300; margin-bottom: 1rem; line-height: 1.5; }
-        .vault-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; font-weight: 300; }
+
+        .edu-tab-btn.active {
+            color: var(--bg-primary);
+            background: var(--gold-gradient);
+            border-color: transparent;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
+        }
+
+        .edu-view-panel {
+            display: none;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .edu-view-panel.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* B.Tech Left-Aligned Editorial Display (No box, No timeline) */
+        .btech-clean-display {
+            padding: 1.5rem 0.5rem;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .edu-meta-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .edu-badge-tag {
+            font-family: var(--font-code);
+            font-size: 0.65rem;
+            color: var(--gold-primary);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .edu-badge-status {
+            font-family: var(--font-code);
+            font-size: 0.55rem;
+            color: var(--bg-primary);
+            background: var(--gold-gradient);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+        }
+
+        .edu-degree-heading {
+            font-family: var(--font-heading);
+            font-size: clamp(1.45rem, 3.2vw, 1.95rem);
+            font-weight: 300;
+            color: var(--gold-light);
+            margin-bottom: 0.4rem;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+            text-align: left;
+        }
+
+        .edu-institution-title {
+            font-size: 1rem;
+            color: #FFFFFF;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            text-align: left;
+        }
+
+        .edu-desc-text {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.85;
+            font-weight: 300;
+            max-width: 760px;
+            text-align: left;
+        }
+
+        /* Timeline only inside History */
+        .timeline-container {
+            position: relative;
+            padding-left: 2.2rem;
+            margin-top: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.8rem;
+            text-align: left;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 17px;
+            top: 15px;
+            bottom: 25px;
+            width: 1.5px;
+            background: linear-gradient(180deg, var(--gold-primary) 0%, rgba(212, 175, 55, 0.15) 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            opacity: 0;
+            transform: translateX(-15px);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .edu-view-panel.active .timeline-item:nth-child(1) {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.1s;
+        }
+
+        .edu-view-panel.active .timeline-item:nth-child(2) {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.22s;
+        }
+
+        .timeline-num-badge {
+            position: absolute;
+            left: -2.2rem;
+            top: 2px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #090802;
+            border: 1.5px solid var(--gold-primary);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-code);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gold-light);
+            z-index: 2;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-num-badge {
+            transform: scale(1.1);
+            border-color: var(--gold-light);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .timeline-content {
+            padding-left: 0.8rem;
+        }
+
+        .timeline-content .edu-degree-heading {
+            font-size: clamp(1.2rem, 2.5vw, 1.45rem);
+            margin-bottom: 0.3rem;
+            text-align: left;
+        }
+
+        .timeline-content .edu-institution-title {
+            text-align: left;
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-content .edu-desc-text {
+            text-align: left;
+        }
 
         .coverflow-container { position: relative; width: 100%; max-width: 1000px; margin: 1.5rem auto 1rem auto; height: 420px; perspective: 1400px; overflow: hidden; }
         .coverflow-track { position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transform-style: preserve-3d; left: 0; }
@@ -854,15 +1020,12 @@
             margin-top: auto; letter-spacing: 0.2em; position: relative; z-index: 10;
         }   
 
-        /* Mobile pairing wrapper (transparent on desktop) */
         .mobile-photo-nav-group {
             display: contents; 
         }
 
         /* ==========================================================
            MOBILE SCREEN OVERRIDES (<= 768px):
-           TOP: [INFO (Name & Degree)]
-           BOTTOM: [PHOTO] + [VERTICAL NAV] (Matched 204px Heights)
            ========================================================== */
         @media(max-width: 768px) {
             .dashboard-container { 
@@ -880,7 +1043,6 @@
                 display: contents; 
             }
 
-            /* 1ST ON MOBILE: Name & Details on Top */
             .profile-info { 
                 order: 1; 
                 width: 100%; 
@@ -898,10 +1060,9 @@
                 text-align: center;
             }
 
-            /* 2ND ON MOBILE: Photo Card and Nav Pill aligned side-by-side */
             .mobile-photo-nav-group {
                 order: 2;
-                display: flex;
+                display: flex !important;
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
@@ -910,21 +1071,19 @@
                 margin: 0.4rem 0 0.8rem;
             }
 
-            /* Photo Frame resized to 204px height (equal to Nav) */
             .profile-rect-card { 
                 height: 204px;
-                width: 163px; /* 4:5 ratio for 204px height */
+                width: 163px;
                 margin: 0;
             }
 
-            /* Vertical Navigation Pill matching 204px height */
             .vertical-nav { 
                 display: flex;
                 flex-direction: column; 
                 margin: 0; 
                 padding: 6px;
                 width: 52px;
-                height: 204px; /* Matches photo height */
+                height: 204px;
                 justify-content: space-between;
                 border-radius: 40px; 
                 border: 1px solid rgba(212, 175, 55, 0.25);
@@ -944,9 +1103,12 @@
             }
 
             .img-style-header { justify-content: center; text-align: center; font-size: 1.1rem; }
-            .vault-tabs { gap: 6px; }
-            .vault-tab-btn { padding: 0.5rem 1rem; font-size: 0.6rem; letter-spacing: 0.15em; }
-            .vault-panel { padding: 1.5rem 1.2rem; }
+            .edu-nav-tabs { gap: 8px; }
+            .edu-tab-btn { padding: 0.55rem 1.2rem; font-size: 0.65rem; }
+            .btech-clean-display { padding: 1rem 0.5rem; }
+            .timeline-container { padding-left: 1.8rem; gap: 2.2rem; }
+            .timeline-container::before { left: 14px; }
+            .timeline-num-badge { left: -1.8rem; width: 30px; height: 30px; font-size: 0.65rem; }
             .page-container { padding: 1.2rem 1rem 4rem; width: 100%; overflow: hidden; }
             .coverflow-container { height: 380px; width: 100%; }
             .project-card { width: 85vw; height: auto; padding: 1.5rem; }
@@ -965,6 +1127,12 @@
             .all-skills-card { padding: 1.2rem; gap: 1.2rem; }
             .repertoire-mini-pill { font-size: 0.7rem; height: 32px; padding: 3px 10px 3px 4px; }
             .repertoire-mini-pill img { width: 20px; height: 20px; }
+        }
+
+        @media(min-width: 769px) {
+            .mobile-photo-nav-group {
+                display: contents;
+            }
         }
     </style>  
 </head>  
@@ -993,9 +1161,7 @@
 <div id="mouse-glow"></div>  
   
 <header class="dashboard-container">  
-    <!-- ON DESKTOP: Photo + Name/Title together on Left -->
     <div class="profile-brand-cluster">
-        <!-- 1. PHOTO CARD (1st on Desktop, Left) -->
         <div class="profile-rect-card" id="profile-card">
             <div class="profile-rect-inner">
                 <img 
@@ -1007,7 +1173,6 @@
             </div>
         </div>
 
-        <!-- 2. PROFILE INFO (Beside Photo on Desktop) -->
         <div class="profile-info">  
             <h3>open to opportunities</h3>
             <h1>SUGANYA S</h1>  
@@ -1018,7 +1183,6 @@
         </div>  
     </div>
 
-    <!-- 3. NAVIGATION PILL (Desktop: Far Right | Mobile: Moved beside photo via JS) -->
     <nav class="vertical-nav" id="main-nav">  
         <div class="nav-pill-bg" id="nav-pill-bg"></div>
         <button class="nav-btn active" data-target="page-home" aria-label="Home">
@@ -1130,45 +1294,67 @@
         </div>  
     </section>  
 
+    <!-- ==========================================================
+         PAGE: EDUCATION (LEFT-ALIGNED CLEAN EDITORIAL)
+         ========================================================== -->
     <section id="page-education" class="page">  
         <h2 class="img-style-header reveal-element delay-1">Academic Pedigree</h2>  
           
-        <div class="holo-vault-container reveal-element delay-2">
-            <div class="vault-tabs">
-                <button type="button" class="vault-tab-btn active" onclick="switchVaultTab(0)">B.Tech AI & DS</button>
-                <button type="button" class="vault-tab-btn" onclick="switchVaultTab(1)">Higher Sec</button>
-                <button type="button" class="vault-tab-btn" onclick="switchVaultTab(2)">Matriculation</button>
+        <div class="edu-wrapper reveal-element delay-2">
+            <div class="edu-nav-tabs">
+                <button type="button" class="edu-tab-btn active" onclick="switchEduTab(0)">B.Tech AI & DS</button>
+                <button type="button" class="edu-tab-btn" onclick="switchEduTab(1)">History</button>
             </div>
 
-            <div class="vault-stage">
-                <div class="vault-panel active" id="vault-panel-0">
-                    <div class="vault-panel-header">
-                        <span class="vault-index-tag">HIGHER EDUCATION</span>
-                        <span class="vault-status-pill">PRESENT</span>
+            <!-- PANEL 0: B.TECH (LEFT-ALIGNED, NO BOXING, NO TIMELINE) -->
+            <div class="edu-view-panel active" id="edu-panel-0">
+                <div class="btech-clean-display">
+                    <div class="edu-meta-row">
+                        <span class="edu-badge-tag">HIGHER EDUCATION</span>
+                        <span class="edu-badge-status">PRESENT</span>
                     </div>
-                    <h3 class="vault-degree-title">B.Tech Artificial Intelligence & Data Science</h3>
-                    <div class="vault-institution-name">JP College of Engineering (JPCOE), Tenkasi &mdash; Anna University[span_5](start_span)[span_5](end_span)</div>
-                    <p class="vault-desc">Building robust theoretical and practical foundations in advanced neural network architectures, predictive modeling, machine learning pipelines, and scalable data systems.</p>
+                    <h3 class="edu-degree-heading">B.Tech Artificial Intelligence & Data Science</h3>
+                    <div class="edu-institution-title">JP College of Engineering (JPCOE), Tenkasi — Anna University[span_0](start_span)[span_0](end_span)</div>
+                    <p class="edu-desc-text">
+                        Building robust theoretical and practical foundations in advanced neural network architectures, predictive modeling, machine learning pipelines, and scalable data systems.
+                    </p>
                 </div>
+            </div>
 
-                <div class="vault-panel" id="vault-panel-1">
-                    <div class="vault-panel-header">
-                        <span class="vault-index-tag">SECONDARY STUDIES</span>
-                        <span class="vault-status-pill" style="background: rgba(212, 175, 55, 0.2); color: var(--gold-light);">COMPLETED</span>
+            <!-- PANEL 1: HISTORY (NUMBERED 01 & 02 TIMELINE) -->
+            <div class="edu-view-panel" id="edu-panel-1">
+                <div class="timeline-container">
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-num-badge">01</div>
+                        <div class="timeline-content">
+                            <div class="edu-meta-row">
+                                <span class="edu-badge-tag">SECONDARY STUDIES</span>
+                                <span class="edu-badge-status" style="background: rgba(212, 175, 55, 0.2); color: var(--gold-light);">COMPLETED</span>
+                            </div>
+                            <h3 class="edu-degree-heading">Higher Secondary Education</h3>
+                            <div class="edu-institution-title">TMT Manjammal Girls Govt HR Sec School, Tenkasi</div>
+                            <p class="edu-desc-text">
+                                Rigorous specialized coursework focusing on advanced mathematics, analytical physics, and foundational computer logic systems.
+                            </p>
+                        </div>
                     </div>
-                    <h3 class="vault-degree-title">Higher Secondary Education</h3>
-                    <div class="vault-institution-name">TMT Manjammal Girls Govt HR Sec School, Tenkasi</div>
-                    <p class="vault-desc">Rigorous specialized coursework focusing on advanced mathematics, analytical physics, and foundational computer logic systems.</p>
-                </div>
 
-                <div class="vault-panel" id="vault-panel-2">
-                    <div class="vault-panel-header">
-                        <span class="vault-index-tag">FOUNDATIONAL ROOTS</span>
-                        <span class="vault-status-pill" style="background: rgba(212, 175, 55, 0.2); color: var(--gold-light);">COMPLETED</span>
+                    <div class="timeline-item">
+                        <div class="timeline-num-badge">02</div>
+                        <div class="timeline-content">
+                            <div class="edu-meta-row">
+                                <span class="edu-badge-tag">FOUNDATIONAL ROOTS</span>
+                                <span class="edu-badge-status" style="background: rgba(212, 175, 55, 0.2); color: var(--gold-light);">COMPLETED</span>
+                            </div>
+                            <h3 class="edu-degree-heading">Matriculation</h3>
+                            <div class="edu-institution-title">St. John's Matric HR Sec School, Tenkasi</div>
+                            <p class="edu-desc-text">
+                                Core foundation in analytical science, mathematics, and logical reasoning.
+                            </p>
+                        </div>
                     </div>
-                    <h3 class="vault-degree-title">Matriculation</h3>
-                    <div class="vault-institution-name">St. John's Matric HR Sec School, Tenkasi</div>
-                    <p class="vault-desc">Core foundation in science, mathematics, and logical analysis.</p>
+
                 </div>
             </div>
         </div>
@@ -1185,7 +1371,7 @@
                         <div class="scroll-card-tag">AI & VISION</div>
                         <h3 class="scroll-card-title">NeuroVision AI</h3>  
                         <div class="title-gold-line"></div>
-                        <p class="scroll-card-desc">AI-powered MRI analysis combining deep learning classification, clinical interpretability, and attention map heatmaps.</p>  
+                        <p class="scroll-card-desc">AI-powered MRI analysis combining deep learning classification, clinical interpretability, and attention map heatmaps.[span_1](start_span)[span_1](end_span)</p>  
                         <button type="button" class="view-result-btn" onclick="event.stopPropagation(); openModal('assets/image2.jpg')">
                             <span>View Result</span>
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
@@ -1203,7 +1389,7 @@
                         <div class="scroll-card-tag">CLUSTERING</div>
                         <h3 class="scroll-card-title">Customer Segmentation</h3>  
                         <div class="title-gold-line"></div>
-                        <p class="scroll-card-desc">Segment customers based on behavior and demographics with actionable insights and demographic distribution.</p>  
+                        <p class="scroll-card-desc">Segment customers based on behavior and demographics with actionable insights and demographic distribution.[span_2](start_span)[span_2](end_span)</p>  
                         <button type="button" class="view-result-btn" onclick="event.stopPropagation(); openModal('assets/image5.jpg')">
                             <span>View Result</span>
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
@@ -1238,7 +1424,7 @@
                         <div class="scroll-card-tag">MODELING</div>
                         <h3 class="scroll-card-title">Predictive Analytics Using Historical Data</h3>  
                         <div class="title-gold-line"></div>
-                        <p class="scroll-card-desc">Build a predictive model to forecast future trends using time-series forecast and historical records.</p>  
+                        <p class="scroll-card-desc">Build a predictive model to forecast future trends using time-series forecast and historical records.[span_3](start_span)[span_3](end_span)</p>  
                         <button type="button" class="view-result-btn" onclick="event.stopPropagation(); openModal('assets/image4.jpg')">
                             <span>View Result</span>
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
@@ -1255,7 +1441,7 @@
                         <div class="scroll-card-tag">ANALYTICS</div>
                         <h3 class="scroll-card-title">Sales & Revenue Analysis Dashboard</h3>  
                         <div class="title-gold-line"></div>
-                        <p class="scroll-card-desc">Build a dashboard to analyze sales and revenue data with performance trends and category insights.</p>  
+                        <p class="scroll-card-desc">Build a dashboard to analyze sales and revenue data with performance trends and category insights.[span_4](start_span)[span_4](end_span)</p>  
                         <button type="button" class="view-result-btn" onclick="event.stopPropagation(); openModal('assets/image6.jpg')">
                             <span>View Result</span>
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
@@ -1272,7 +1458,7 @@
                         <div class="scroll-card-tag">AUTOMATION</div>
                         <h3 class="scroll-card-title">Data Cleaning & Reporting Automation</h3>  
                         <div class="title-gold-line"></div>
-                        <p class="scroll-card-desc">Automate data cleaning and reporting workflows to handle missing values, duplicates, and workflow status.</p>  
+                        <p class="scroll-card-desc">Automate data cleaning and reporting workflows to handle missing values, duplicates, and workflow status.[span_5](start_span)[span_5](end_span)</p>  
                         <button type="button" class="view-result-btn" onclick="event.stopPropagation(); openModal('assets/image3.jpg')">
                             <span>View Result</span>
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
@@ -1302,7 +1488,7 @@
         <div class="resume-card reveal-element delay-1">  
             <h2 class="img-style-header" style="justify-content: center; margin-bottom: 1rem;">Initiate Contact</h2>  
             <p style="color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; font-weight: 300; max-width: 550px; margin: 0 auto;">  
-                Open to discussing architectural AI solutions, data infrastructure, and professional collaborations. Connect with me directly or review my dossier.
+                Open to discussing architectural AI solutions, data infrastructure, and professional collaborations. Connect with me directly or review my dossier.[span_6](start_span)[span_6](end_span)
             </p>  
             
             <div class="social-row">  
@@ -1344,7 +1530,6 @@
 </div>
 
 <script>  
-    /* Seamless screen reorganization without HTML duplication */
     function adaptHeaderLayout() {
         const isMobile = window.innerWidth <= 768;
         const profileCard = document.getElementById('profile-card');
@@ -1491,15 +1676,15 @@
         }
     }
 
-    const vaultTabs = document.querySelectorAll('.vault-tab-btn');
-    const vaultPanels = document.querySelectorAll('.vault-panel');
+    function switchEduTab(index) {
+        const tabs = document.querySelectorAll('.edu-tab-btn');
+        const panels = document.querySelectorAll('.edu-view-panel');
 
-    function switchVaultTab(index) {
-        vaultTabs.forEach((tab, idx) => {
+        tabs.forEach((tab, idx) => {
             tab.classList.toggle('active', idx === index);
         });
 
-        vaultPanels.forEach((panel, idx) => {
+        panels.forEach((panel, idx) => {
             panel.classList.toggle('active', idx === index);
         });
     }
