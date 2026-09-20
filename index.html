@@ -6,7 +6,6 @@
     <title>SUGANYA S — Portfolio</title>  
     <link rel="preconnect" href="https://fonts.googleapis.com">  
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
-    <!-- Ultra-Premium Tech & Editorial Fonts -->  
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=Inter:wght@300;400;500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">  
     <style>  
         :root {  
@@ -84,7 +83,6 @@
             pointer-events: none; z-index: -2; opacity: 0.85; 
         }  
 
-        /* UPGRADED INTRO SPLASH SCREEN */
         #intro-splash {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             background: radial-gradient(circle at center, #141004 0%, var(--bg-primary) 70%);
@@ -171,7 +169,7 @@
             height: 1px; background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
         }
 
-        /* Profile Layout in Header */
+        /* 4:5 RECTANGULAR PROFILE CARD */
         .profile-brand-cluster {
             display: flex;
             align-items: center;
@@ -180,48 +178,72 @@
             min-width: 0;
         }
 
-        .profile-avatar-frame {
+        .profile-rect-card {
             position: relative;
-            width: 112px;
-            height: 112px;
-            border-radius: 50%;
+            width: 110px;
+            aspect-ratio: 4 / 5;
+            border-radius: 12px;
             padding: 3px;
-            background: var(--gold-gradient);
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.35), inset 0 0 15px rgba(255, 223, 115, 0.2);
+            background: linear-gradient(145deg, rgba(212, 175, 55, 0.45) 0%, rgba(20, 16, 6, 0.9) 60%, rgba(212, 175, 55, 0.2) 100%);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 175, 55, 0.15);
             flex-shrink: 0;
             opacity: 0;
-            transform: scale(0.85);
+            transform: translateY(15px);
             animation: heroEntrance 1.1s cubic-bezier(0.16, 1, 0.3, 1) 1.9s forwards;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.4s ease;
         }
 
-        .profile-avatar-frame:hover {
-            transform: scale(1.06);
-            box-shadow: 0 0 35px rgba(212, 175, 55, 0.55);
+        .profile-rect-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            border-color: var(--gold-light);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.35);
         }
 
-        .profile-avatar-frame::before {
+        .profile-rect-card::before {
             content: '';
             position: absolute;
-            inset: -6px;
-            border-radius: 50%;
-            border: 1px dashed rgba(212, 175, 55, 0.35);
-            animation: rotateFrame 18s linear infinite;
+            top: -3px;
+            left: -3px;
+            width: 10px;
+            height: 10px;
+            border-top: 2px solid var(--gold-light);
+            border-left: 2px solid var(--gold-light);
+            pointer-events: none;
         }
 
-        @keyframes rotateFrame {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .profile-rect-card::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            right: -3px;
+            width: 10px;
+            height: 10px;
+            border-bottom: 2px solid var(--gold-light);
+            border-right: 2px solid var(--gold-light);
+            pointer-events: none;
         }
 
-        .profile-avatar-img {
+        .profile-rect-inner {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
+            border-radius: 9px;
+            overflow: hidden;
+            background: #090802;
+            position: relative;
+        }
+
+        .profile-rect-img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             object-position: center top;
-            background: #090802;
             display: block;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .profile-rect-card:hover .profile-rect-img {
+            transform: scale(1.06);
         }
 
         .profile-info { position: relative; flex: 1; min-width: 0; }
@@ -312,6 +334,7 @@
             word-spacing: 2px;
         }
 
+        /* NAV BAR (DEFAULT DESKTOP) */
         .vertical-nav {  
             display: flex; gap: 6px; position: relative; flex-shrink: 0;
             background: rgba(15, 12, 5, 0.7); padding: 6px; border-radius: 100px;
@@ -372,9 +395,181 @@
         .delay-2 { transition-delay: 0.05s; } 
         .delay-3 { transition-delay: 0.08s; }
 
+        /* SKILL PILL CARDS */
+        .marquee-container {  
+            position: relative; width: 100%; overflow: hidden;  
+            display: flex; flex-direction: column; gap: 1.2rem; padding: 1rem 0;  
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);  
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);  
+        }  
+        .marquee-track { display: flex; gap: 1.2rem; width: max-content; }  
+        .marquee-track.scroll-left { animation: scrollLeft 40s linear infinite; }  
+          
+        @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }  
+
+        .skill-pill-card {  
+            background: var(--card-bg); border: 1px solid var(--card-border);  
+            border-top: 1px solid var(--card-glass-edge); border-radius: 50px; 
+            padding: 5px 20px 5px 5px; 
+            height: 44px;
+            width: auto;
+            min-width: 140px; 
+            display: flex; align-items: center; gap: 12px; 
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            box-shadow: inset 0 1px 0 rgba(255,223,115,0.06); transition: var(--transition-fast);
+            flex-shrink: 0; position: relative; overflow: hidden;
+        }  
+        .skill-pill-card:hover { 
+            border-color: var(--gold-primary); transform: translateY(-2px); 
+            background: rgba(212, 175, 55, 0.08); 
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.1);
+        }
+        .skill-icon-wrapper {  
+            width: 32px; height: 32px; 
+            background: rgba(0, 0, 0, 0.4); 
+            border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }  
+        .skill-icon-wrapper img { width: 16px; height: 16px; object-fit: contain; }  
+        
+        .skill-name { 
+            font-family: var(--font-body); font-size: 0.85rem; 
+            font-weight: 500; color: #F0F0F0; letter-spacing: 0.08em; white-space: nowrap; 
+        }  
+
+        /* ==========================================================
+           "VIEW ALL REPERTOIRE" EXPANDABLE VAULT (NEW OPTION)
+           ========================================================== */
+        .repertoire-action-row {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 5;
+        }
+
+        .repertoire-toggle-btn {
+            background: rgba(15, 12, 5, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--gold-light);
+            font-family: var(--font-code);
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 0.55rem 1.4rem;
+            border-radius: 30px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(15px);
+            transition: var(--transition-fast);
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .repertoire-toggle-btn:hover {
+            border-color: var(--gold-primary);
+            background: rgba(212, 175, 55, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .repertoire-toggle-btn svg {
+            width: 13px;
+            height: 13px;
+            transition: transform 0.3s ease;
+        }
+
+        .repertoire-toggle-btn.expanded svg {
+            transform: rotate(180deg);
+        }
+
+        /* Full Repertoire Drawer */
+        .all-skills-grid-drawer {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, margin 0.4s ease;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .all-skills-grid-drawer.open {
+            max-height: 800px;
+            opacity: 1;
+            margin: 2rem auto 0;
+        }
+
+        .all-skills-card {
+            background: linear-gradient(135deg, rgba(20, 16, 6, 0.9), rgba(8, 6, 2, 0.95));
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem;
+        }
+
+        .skill-category-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .category-label {
+            font-family: var(--font-code);
+            font-size: 0.65rem;
+            color: var(--gold-primary);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            padding-bottom: 0.3rem;
+        }
+
+        .category-pills-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        .repertoire-mini-pill {
+            background: rgba(12, 10, 4, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 50px;
+            padding: 4px 14px 4px 5px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 0.78rem;
+            color: #f3f3f3;
+            font-family: var(--font-body);
+            letter-spacing: 0.04em;
+            transition: var(--transition-fast);
+        }
+
+        .repertoire-mini-pill:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-2px);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .repertoire-mini-pill img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.5);
+            padding: 4px;
+            object-fit: contain;
+        }
+        /* ========================================================== */
+
         .editorial-summary { 
             max-width: 900px; 
-            margin: 4rem auto 0 auto; 
+            margin: 3.5rem auto 0 auto; 
             background: linear-gradient(135deg, rgba(20, 16, 6, 0.9), rgba(8, 6, 2, 0.95));
             border: 1px solid rgba(212, 175, 55, 0.3);
             border-radius: 16px;
@@ -443,47 +638,6 @@
             color: var(--gold-primary);
             font-weight: 300;
         }
-
-        .marquee-container {  
-            position: relative; width: 100%; overflow: hidden;  
-            display: flex; flex-direction: column; gap: 1.2rem; padding: 1rem 0;  
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);  
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);  
-        }  
-        .marquee-track { display: flex; gap: 1.2rem; width: max-content; }  
-        .marquee-track.scroll-left { animation: scrollLeft 40s linear infinite; }  
-          
-        @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }  
-
-        .skill-pill-card {  
-            background: var(--card-bg); border: 1px solid var(--card-border);  
-            border-top: 1px solid var(--card-glass-edge); border-radius: 50px; 
-            padding: 5px 20px 5px 5px; 
-            height: 44px;
-            width: auto;
-            min-width: 140px; 
-            display: flex; align-items: center; gap: 12px; 
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            box-shadow: inset 0 1px 0 rgba(255,223,115,0.06); transition: var(--transition-fast);
-            flex-shrink: 0; position: relative; overflow: hidden;
-        }  
-        .skill-pill-card:hover { 
-            border-color: var(--gold-primary); transform: translateY(-2px); 
-            background: rgba(212, 175, 55, 0.08); 
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.1);
-        }
-        .skill-icon-wrapper {  
-            width: 32px; height: 32px; 
-            background: rgba(0, 0, 0, 0.4); 
-            border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-        }  
-        .skill-icon-wrapper img { width: 16px; height: 16px; object-fit: contain; }  
-        
-        .skill-name { 
-            font-family: var(--font-body); font-size: 0.85rem; 
-            font-weight: 500; color: #F0F0F0; letter-spacing: 0.08em; white-space: nowrap; 
-        }  
 
         .holo-vault-container { max-width: 850px; margin: 1.5rem auto; position: relative; width: 100%; }
         .vault-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; }
@@ -642,26 +796,6 @@
             width: 100%; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
         }  
 
-        .connect-portrait-badge {
-            width: 84px;
-            height: 84px;
-            border-radius: 50%;
-            margin: 0 auto 1.4rem;
-            padding: 2.5px;
-            background: var(--gold-gradient);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-            display: block;
-        }
-
-        .connect-portrait-badge img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: center top;
-            display: block;
-        }
-
         .resume-actions { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }  
         .resume-btn {  
             display: inline-flex; align-items: center; gap: 8px; justify-content: center;  
@@ -680,11 +814,21 @@
             margin-top: auto; letter-spacing: 0.2em; position: relative; z-index: 10;
         }   
 
+        /* ==========================================================
+           RESPONSIVE MOBILE VIEW (ZERO HORIZONTAL EXCESS SPACE)
+           ========================================================== */
         @media(max-width: 768px) {
-            .dashboard-container { flex-direction: column; align-items: center; text-align: center; padding: 1.5rem 1rem 1rem; gap: 1.5rem; width: 100%; }
+            .dashboard-container { 
+                flex-direction: column; 
+                align-items: center; 
+                text-align: center; 
+                padding: 1.5rem 1rem 1rem; 
+                gap: 1.5rem; 
+                width: 100%; 
+            }
             .dashboard-container::after { left: 1rem; right: 1rem; }
             .profile-brand-cluster { flex-direction: column; align-items: center; text-align: center; gap: 1.2rem; }
-            .profile-avatar-frame { width: 96px; height: 96px; }
+            .profile-rect-card { width: 100px; }
             .profile-info { width: 100%; display: flex; flex-direction: column; align-items: center; }
             .profile-info h3 { justify-content: center; }
             
@@ -694,7 +838,15 @@
                 text-align: center;
             }
 
-            .vertical-nav { margin-top: 0.5rem; width: 100%; justify-content: center; border-radius: 50px; }
+            /* FIXED: Pill wraps tightly around buttons with no extra horizontal gap */
+            .vertical-nav { 
+                margin: 0.8rem auto 0; 
+                width: fit-content;        
+                max-width: 90vw;
+                justify-content: center; 
+                border-radius: 100px; 
+            }
+
             .img-style-header { justify-content: center; text-align: center; font-size: 1.1rem; }
             .vault-tabs { gap: 6px; }
             .vault-tab-btn { padding: 0.5rem 1rem; font-size: 0.6rem; letter-spacing: 0.15em; }
@@ -713,6 +865,10 @@
             .skill-icon-wrapper { width: 28px; height: 28px; }
             .skill-icon-wrapper img { width: 14px; height: 14px; }
             .skill-name { font-size: 0.75rem; }
+
+            .all-skills-card { padding: 1.2rem; gap: 1.2rem; }
+            .repertoire-mini-pill { font-size: 0.7rem; height: 32px; padding: 3px 10px 3px 4px; }
+            .repertoire-mini-pill img { width: 20px; height: 20px; }
         }
     </style>  
 </head>  
@@ -742,14 +898,16 @@
   
 <header class="dashboard-container">  
     <div class="profile-brand-cluster">
-        <!-- Integrated Profile Ring Frame -->
-        <div class="profile-avatar-frame">
-            <img 
-                src="profile.png" 
-                alt="Suganya S" 
-                class="profile-avatar-img"
-                onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' fill=\'%23050505\'%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'50\' fill=\'%23141004\'/%3E%3Ctext x=\'50\' y=\'58\' font-family=\'sans-serif\' font-size=\'32\' font-weight=\'bold\' fill=\'%23D4AF37\' text-anchor=\'middle\'%3ESS%3C/text%3E%3C/svg%3E';"
-            >
+        <!-- 4:5 RECTANGULAR PROFILE FRAME -->
+        <div class="profile-rect-card">
+            <div class="profile-rect-inner">
+                <img 
+                    src="profile.png" 
+                    alt="Suganya S" 
+                    class="profile-rect-img"
+                    onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 125\' fill=\'%23050505\'%3E%3Crect width=\'100\' height=\'125\' fill=\'%23141004\'/%3E%3Ctext x=\'50\' y=\'68\' font-family=\'sans-serif\' font-size=\'30\' font-weight=\'bold\' fill=\'%23D4AF37\' text-anchor=\'middle\'%3ESS%3C/text%3E%3C/svg%3E';"
+                >
+            </div>
         </div>
 
         <div class="profile-info">  
@@ -784,6 +942,7 @@
     <section id="page-home" class="page active">  
         <h2 class="img-style-header reveal-element delay-1">Technical Repertoire</h2>  
           
+        <!-- CONTINUOUS FLOWING MARQUEE (UNMODIFIED ANIMATION) -->
         <div class="marquee-container reveal-element delay-2">  
             <div class="marquee-track scroll-left">  
                 <div class="skill-pill-card"><div class="skill-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"></div><span class="skill-name">Python</span></div>  
@@ -808,7 +967,54 @@
             </div>  
         </div>  
 
-        <!-- EDITORIAL SUMMARY SECTION -->
+        <!-- OPTION: TOGGLE BUTTON TO VIEW ALL SKILLS -->
+        <div class="repertoire-action-row reveal-element delay-2">
+            <button type="button" class="repertoire-toggle-btn" id="repertoire-toggle-btn" onclick="toggleAllRepertoire()">
+                <span id="repertoire-toggle-text">Explore All Skills</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+        </div>
+
+        <!-- EXPANDABLE FULL REPERTOIRE DRAWER -->
+        <div class="all-skills-grid-drawer" id="all-skills-drawer">
+            <div class="all-skills-card">
+                <div class="skill-category-group">
+                    <span class="category-label">AI, Deep Learning & Vision</span>
+                    <div class="category-pills-wrap">
+                        <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="">TensorFlow</div>
+                        <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg" alt="">OpenCV</div>
+                        <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" alt="">Scikit-Learn</div>
+                        <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="">K-Means Clustering</div>
+                        <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="">Grad-CAM & XAI</div>
+                    </div>
+                </div>
+
+                <div class="skill-category-group">
+                    <span class="category-label">Data Science & Analytics Pipelines</span>
+                    <div class="category-pills-wrap">
+                        <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="">Pandas</div>
+                        <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="">NumPy</div>
+                        <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="">MySQL / SQL</div>
+                        <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="">Power BI & DAX</div>
+                        <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="">ETL & Data Cleaning</div>
+                    </div>
+                </div>
+
+                <div class="skill-category-group">
+                    <span class="category-label">Web & Product Architecture</span>
+                    <div class="category-pills-wrap">
+                        <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="">HTML5</div>
+                        <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="">CSS3 Modern</div>
+                        <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="">JavaScript (ES6+)</div>
+                        <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="">Git & GitHub</div>
+                        <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="">UI/UX Design Systems</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="editorial-summary reveal-element delay-3">  
             <div class="cyber-terminal-header">
                 <div class="terminal-dots">
@@ -998,15 +1204,6 @@
 
     <section id="page-connect" class="page" style="text-align: center;">  
         <div class="resume-card reveal-element delay-1">  
-            <!-- Profile Avatar in Contact Card -->
-            <div class="connect-portrait-badge">
-                <img 
-                    src="profile.png" 
-                    alt="Suganya S" 
-                    onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' fill=\'%23050505\'%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'50\' fill=\'%23141004\'/%3E%3Ctext x=\'50\' y=\'58\' font-family=\'sans-serif\' font-size=\'32\' font-weight=\'bold\' fill=\'%23D4AF37\' text-anchor=\'middle\'%3ESS%3C/text%3E%3C/svg%3E';"
-                >
-            </div>
-
             <h2 class="img-style-header" style="justify-content: center; margin-bottom: 1rem;">Initiate Contact</h2>  
             <p style="color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; font-weight: 300; max-width: 550px; margin: 0 auto;">  
                 Open to discussing architectural AI solutions, data infrastructure, and professional collaborations. Connect with me directly or review my dossier.
@@ -1141,6 +1338,22 @@
         });  
     });  
 
+    /* Repertoire Expand/Collapse Toggle */
+    function toggleAllRepertoire() {
+        const drawer = document.getElementById('all-skills-drawer');
+        const btn = document.getElementById('repertoire-toggle-btn');
+        const text = document.getElementById('repertoire-toggle-text');
+
+        drawer.classList.toggle('open');
+        btn.classList.toggle('expanded');
+
+        if (drawer.classList.contains('open')) {
+            text.textContent = 'Hide All Skills';
+        } else {
+            text.textContent = 'Explore All Skills';
+        }
+    }
+
     const vaultTabs = document.querySelectorAll('.vault-tab-btn');
     const vaultPanels = document.querySelectorAll('.vault-panel');
 
@@ -1274,7 +1487,6 @@
         if (activeBtn) updateNavPill(activeBtn);
     });
 
-    /* MATRIX SKILL RAIN */
     const canvas = document.getElementById('fluid-canvas');  
     const ctx = canvas.getContext('2d');  
     let width, height;
