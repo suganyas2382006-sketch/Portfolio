@@ -334,7 +334,7 @@
             word-spacing: 2px;
         }
 
-        /* NAV BAR (DEFAULT DESKTOP) */
+        /* NAVIGATION PILL */
         .vertical-nav {  
             display: flex; gap: 6px; position: relative; flex-shrink: 0;
             background: rgba(15, 12, 5, 0.7); padding: 6px; border-radius: 100px;
@@ -437,9 +437,7 @@
             font-weight: 500; color: #F0F0F0; letter-spacing: 0.08em; white-space: nowrap; 
         }  
 
-        /* ==========================================================
-           "VIEW ALL REPERTOIRE" EXPANDABLE VAULT (NEW OPTION)
-           ========================================================== */
+        /* REPERTOIRE TOGGLE AND DRAWER */
         .repertoire-action-row {
             display: flex;
             justify-content: center;
@@ -486,7 +484,6 @@
             transform: rotate(180deg);
         }
 
-        /* Full Repertoire Drawer */
         .all-skills-grid-drawer {
             max-height: 0;
             overflow: hidden;
@@ -565,7 +562,6 @@
             padding: 4px;
             object-fit: contain;
         }
-        /* ========================================================== */
 
         .editorial-summary { 
             max-width: 900px; 
@@ -815,7 +811,7 @@
         }   
 
         /* ==========================================================
-           RESPONSIVE MOBILE VIEW (ZERO HORIZONTAL EXCESS SPACE)
+           RESPONSIVE MOBILE VIEW (ORDER: STATUS -> NAME -> PHOTO)
            ========================================================== */
         @media(max-width: 768px) {
             .dashboard-container { 
@@ -823,24 +819,44 @@
                 align-items: center; 
                 text-align: center; 
                 padding: 1.5rem 1rem 1rem; 
-                gap: 1.5rem; 
+                gap: 1.2rem; 
                 width: 100%; 
             }
             .dashboard-container::after { left: 1rem; right: 1rem; }
-            .profile-brand-cluster { flex-direction: column; align-items: center; text-align: center; gap: 1.2rem; }
-            .profile-rect-card { width: 100px; }
-            .profile-info { width: 100%; display: flex; flex-direction: column; align-items: center; }
-            .profile-info h3 { justify-content: center; }
             
+            .profile-brand-cluster { 
+                flex-direction: column; 
+                align-items: center; 
+                text-align: center; 
+                gap: 1.4rem; 
+                width: 100%;
+            }
+
+            /* ORDER FIX: Info first, then Photo */
+            .profile-info { 
+                order: 1; 
+                width: 100%; 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center; 
+            }
+
+            .profile-info h3 { justify-content: center; }
+
             .header-meta-stack {
                 align-items: center;
                 width: 100%;
                 text-align: center;
             }
 
-            /* FIXED: Pill wraps tightly around buttons with no extra horizontal gap */
+            .profile-rect-card { 
+                order: 2; 
+                width: 110px; 
+            }
+
+            /* Tight, centered navigation pill */
             .vertical-nav { 
-                margin: 0.8rem auto 0; 
+                margin: 0.6rem auto 0; 
                 width: fit-content;        
                 max-width: 90vw;
                 justify-content: center; 
@@ -898,7 +914,7 @@
   
 <header class="dashboard-container">  
     <div class="profile-brand-cluster">
-        <!-- 4:5 RECTANGULAR PROFILE FRAME -->
+        <!-- 4:5 RECTANGULAR PROFILE FRAME (ORDER 2 ON MOBILE) -->
         <div class="profile-rect-card">
             <div class="profile-rect-inner">
                 <img 
@@ -910,6 +926,7 @@
             </div>
         </div>
 
+        <!-- PROFILE TEXT (ORDER 1 ON MOBILE) -->
         <div class="profile-info">  
             <h3>open to opportunities</h3>
             <h1>SUGANYA S</h1>  
@@ -942,7 +959,6 @@
     <section id="page-home" class="page active">  
         <h2 class="img-style-header reveal-element delay-1">Technical Repertoire</h2>  
           
-        <!-- CONTINUOUS FLOWING MARQUEE (UNMODIFIED ANIMATION) -->
         <div class="marquee-container reveal-element delay-2">  
             <div class="marquee-track scroll-left">  
                 <div class="skill-pill-card"><div class="skill-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"></div><span class="skill-name">Python</span></div>  
@@ -967,7 +983,6 @@
             </div>  
         </div>  
 
-        <!-- OPTION: TOGGLE BUTTON TO VIEW ALL SKILLS -->
         <div class="repertoire-action-row reveal-element delay-2">
             <button type="button" class="repertoire-toggle-btn" id="repertoire-toggle-btn" onclick="toggleAllRepertoire()">
                 <span id="repertoire-toggle-text">Explore All Skills</span>
@@ -977,7 +992,6 @@
             </button>
         </div>
 
-        <!-- EXPANDABLE FULL REPERTOIRE DRAWER -->
         <div class="all-skills-grid-drawer" id="all-skills-drawer">
             <div class="all-skills-card">
                 <div class="skill-category-group">
@@ -1338,7 +1352,6 @@
         });  
     });  
 
-    /* Repertoire Expand/Collapse Toggle */
     function toggleAllRepertoire() {
         const drawer = document.getElementById('all-skills-drawer');
         const btn = document.getElementById('repertoire-toggle-btn');
