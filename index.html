@@ -84,9 +84,7 @@
             pointer-events: none; z-index: -2; opacity: 0.85; 
         }  
 
-        /* ==========================================================
-           UPGRADED INTRO SPLASH SCREEN
-           ========================================================== */
+        /* UPGRADED INTRO SPLASH SCREEN */
         #intro-splash {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             background: radial-gradient(circle at center, #141004 0%, var(--bg-primary) 70%);
@@ -137,12 +135,8 @@
             animation: loadProgress 1.4s cubic-bezier(0.77, 0, 0.175, 1) 0.6s forwards;
         }
 
-        @keyframes cinematicReveal {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
+        @keyframes cinematicReveal { to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { to { opacity: 1; } }
         @keyframes textShimmer {
             0% { background-position: 0% center; }
             100% { background-position: 200% center; }
@@ -152,7 +146,6 @@
             40% { width: 70%; }
             100% { width: 100%; }
         }
-        /* ========================================================== */
 
         #scroll-progress {
             position: fixed; top: 0; left: 0; height: 2px;
@@ -178,11 +171,61 @@
             height: 1px; background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
         }
 
-        .profile-info { position: relative; flex: 1; min-width: 0; width: 100%; }
+        /* Profile Layout in Header */
+        .profile-brand-cluster {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex: 1;
+            min-width: 0;
+        }
 
-        /* ==========================================================
-           UPGRADED HERO NAME ANIMATION
-           ========================================================== */
+        .profile-avatar-frame {
+            position: relative;
+            width: 112px;
+            height: 112px;
+            border-radius: 50%;
+            padding: 3px;
+            background: var(--gold-gradient);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.35), inset 0 0 15px rgba(255, 223, 115, 0.2);
+            flex-shrink: 0;
+            opacity: 0;
+            transform: scale(0.85);
+            animation: heroEntrance 1.1s cubic-bezier(0.16, 1, 0.3, 1) 1.9s forwards;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        }
+
+        .profile-avatar-frame:hover {
+            transform: scale(1.06);
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.55);
+        }
+
+        .profile-avatar-frame::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 1px dashed rgba(212, 175, 55, 0.35);
+            animation: rotateFrame 18s linear infinite;
+        }
+
+        @keyframes rotateFrame {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .profile-avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            background: #090802;
+            display: block;
+        }
+
+        .profile-info { position: relative; flex: 1; min-width: 0; }
+
         .profile-info h1 {  
             font-family: var(--font-heading); 
             font-size: clamp(2.2rem, 5vw, 4.8rem);  
@@ -196,7 +239,6 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 0.3rem; 
             word-break: break-word;
-            
             opacity: 0;
             filter: blur(10px);
             transform: translateY(20px);
@@ -222,7 +264,6 @@
             animation: heroEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) 2.0s forwards;
         }  
 
-        /* --- GLOSSY PULSING DOT --- */
         .profile-info h3::before {
             content: ''; 
             display: inline-block; 
@@ -260,7 +301,6 @@
             0% { opacity: 0; transform: translateY(20px); filter: blur(8px); }
             100% { opacity: 1; transform: translateY(0); filter: blur(0px); }
         }
-        /* ========================================================== */
 
         .degree-text {
             font-family: var(--font-code); 
@@ -352,15 +392,8 @@
             margin-bottom: 1.8rem;
         }
 
-        .terminal-dots {
-            display: flex;
-            gap: 6px;
-        }
-
-        .terminal-dot {
-            width: 10px; height: 10px; border-radius: 50%;
-            background: rgba(212, 175, 55, 0.3);
-        }
+        .terminal-dots { display: flex; gap: 6px; }
+        .terminal-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(212, 175, 55, 0.3); }
         .terminal-dot:nth-child(1) { background: #E0AA3E; }
         .terminal-dot:nth-child(2) { background: #D4AF37; }
         .terminal-dot:nth-child(3) { background: #FFDF73; }
@@ -422,21 +455,14 @@
           
         @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }  
 
-        /* ==========================================================
-           FIXED SKILL PILL SIZING (SLEEK & PROPORTIONAL)
-           ========================================================== */
         .skill-pill-card {  
             background: var(--card-bg); border: 1px solid var(--card-border);  
             border-top: 1px solid var(--card-glass-edge); border-radius: 50px; 
-            
-            /* Precise padding to maintain the pill shape */
             padding: 5px 20px 5px 5px; 
-            height: 44px; /* Forces a sleek, thin line */
+            height: 44px;
             width: auto;
             min-width: 140px; 
-            
             display: flex; align-items: center; gap: 12px; 
-            
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             box-shadow: inset 0 1px 0 rgba(255,223,115,0.06); transition: var(--transition-fast);
             flex-shrink: 0; position: relative; overflow: hidden;
@@ -458,8 +484,6 @@
             font-family: var(--font-body); font-size: 0.85rem; 
             font-weight: 500; color: #F0F0F0; letter-spacing: 0.08em; white-space: nowrap; 
         }  
-
-        /* ========================================================== */
 
         .holo-vault-container { max-width: 850px; margin: 1.5rem auto; position: relative; width: 100%; }
         .vault-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; }
@@ -618,6 +642,26 @@
             width: 100%; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
         }  
 
+        .connect-portrait-badge {
+            width: 84px;
+            height: 84px;
+            border-radius: 50%;
+            margin: 0 auto 1.4rem;
+            padding: 2.5px;
+            background: var(--gold-gradient);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            display: block;
+        }
+
+        .connect-portrait-badge img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+        }
+
         .resume-actions { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }  
         .resume-btn {  
             display: inline-flex; align-items: center; gap: 8px; justify-content: center;  
@@ -639,6 +683,8 @@
         @media(max-width: 768px) {
             .dashboard-container { flex-direction: column; align-items: center; text-align: center; padding: 1.5rem 1rem 1rem; gap: 1.5rem; width: 100%; }
             .dashboard-container::after { left: 1rem; right: 1rem; }
+            .profile-brand-cluster { flex-direction: column; align-items: center; text-align: center; gap: 1.2rem; }
+            .profile-avatar-frame { width: 96px; height: 96px; }
             .profile-info { width: 100%; display: flex; flex-direction: column; align-items: center; }
             .profile-info h3 { justify-content: center; }
             
@@ -658,22 +704,15 @@
             .project-card { width: 85vw; height: auto; padding: 1.5rem; }
             .editorial-summary { padding: 1.5rem 1rem; }
             
-            /* ADDED: Mobile-specific skill pill sizes */
             .skill-pill-card {
                 padding: 4px 16px 4px 4px;
                 height: 38px;
                 min-width: 120px;
                 gap: 10px;
             }
-            .skill-icon-wrapper {
-                width: 28px; height: 28px;
-            }
-            .skill-icon-wrapper img {
-                width: 14px; height: 14px;
-            }
-            .skill-name {
-                font-size: 0.75rem;
-            }
+            .skill-icon-wrapper { width: 28px; height: 28px; }
+            .skill-icon-wrapper img { width: 14px; height: 14px; }
+            .skill-name { font-size: 0.75rem; }
         }
     </style>  
 </head>  
@@ -702,14 +741,26 @@
 <div id="mouse-glow"></div>  
   
 <header class="dashboard-container">  
-    <div class="profile-info">  
-        <h3>open to opportunities</h3>
-        <h1>SUGANYA S</h1>  
-        
-        <div class="header-meta-stack">
-            <span class="degree-text">B.TECH ARTIFICIAL INTELLIGENCE & DATA SCIENCE</span>
+    <div class="profile-brand-cluster">
+        <!-- Integrated Profile Ring Frame -->
+        <div class="profile-avatar-frame">
+            <img 
+                src="profile.png" 
+                alt="Suganya S" 
+                class="profile-avatar-img"
+                onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' fill=\'%23050505\'%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'50\' fill=\'%23141004\'/%3E%3Ctext x=\'50\' y=\'58\' font-family=\'sans-serif\' font-size=\'32\' font-weight=\'bold\' fill=\'%23D4AF37\' text-anchor=\'middle\'%3ESS%3C/text%3E%3C/svg%3E';"
+            >
         </div>
-    </div>  
+
+        <div class="profile-info">  
+            <h3>open to opportunities</h3>
+            <h1>SUGANYA S</h1>  
+            
+            <div class="header-meta-stack">
+                <span class="degree-text">B.TECH ARTIFICIAL INTELLIGENCE & DATA SCIENCE</span>
+            </div>
+        </div>  
+    </div>
       
     <nav class="vertical-nav" id="main-nav">  
         <div class="nav-pill-bg" id="nav-pill-bg"></div>
@@ -757,7 +808,7 @@
             </div>  
         </div>  
 
-        <!-- DIFFERENT EDITORIAL STYLE SUMMARY SECTION -->
+        <!-- EDITORIAL SUMMARY SECTION -->
         <div class="editorial-summary reveal-element delay-3">  
             <div class="cyber-terminal-header">
                 <div class="terminal-dots">
@@ -815,7 +866,7 @@
                     </div>
                     <h3 class="vault-degree-title">Matriculation</h3>
                     <div class="vault-institution-name">St. John's Matric HR Sec School, Tenkasi</div>
-                    <p class="vault-desc">Core foundation</p>
+                    <p class="vault-desc">Core foundation in science, mathematics, and logical analysis.</p>
                 </div>
             </div>
         </div>
@@ -947,6 +998,15 @@
 
     <section id="page-connect" class="page" style="text-align: center;">  
         <div class="resume-card reveal-element delay-1">  
+            <!-- Profile Avatar in Contact Card -->
+            <div class="connect-portrait-badge">
+                <img 
+                    src="profile.png" 
+                    alt="Suganya S" 
+                    onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' fill=\'%23050505\'%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'50\' fill=\'%23141004\'/%3E%3Ctext x=\'50\' y=\'58\' font-family=\'sans-serif\' font-size=\'32\' font-weight=\'bold\' fill=\'%23D4AF37\' text-anchor=\'middle\'%3ESS%3C/text%3E%3C/svg%3E';"
+                >
+            </div>
+
             <h2 class="img-style-header" style="justify-content: center; margin-bottom: 1rem;">Initiate Contact</h2>  
             <p style="color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; font-weight: 300; max-width: 550px; margin: 0 auto;">  
                 Open to discussing architectural AI solutions, data infrastructure, and professional collaborations. Connect with me directly or review my dossier.
@@ -993,7 +1053,6 @@
 <script>  
     window.addEventListener('load', () => {
         const introSplash = document.getElementById('intro-splash');
-        // Timing adjusted to allow the new animations to fully play out before fading
         setTimeout(() => {
             introSplash.classList.add('fade-out');
             setTimeout(() => {
@@ -1215,9 +1274,7 @@
         if (activeBtn) updateNavPill(activeBtn);
     });
 
-    /* ==========================================================
-       UPGRADED FLUID CANVAS - GOLDEN MATRIX SKILL RAIN
-       ========================================================== */
+    /* MATRIX SKILL RAIN */
     const canvas = document.getElementById('fluid-canvas');  
     const ctx = canvas.getContext('2d');  
     let width, height;
@@ -1243,9 +1300,9 @@
     const rainDrops = Array.from({ length: 65 }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        speedY: Math.random() * 1.2 + 0.3, // varied speed for depth
+        speedY: Math.random() * 1.2 + 0.3,
         word: skillWords[Math.floor(Math.random() * skillWords.length)],
-        alpha: Math.random() * 0.25 + 0.05, // subtle to not distract from main content
+        alpha: Math.random() * 0.25 + 0.05,
         fontSize: Math.random() * 12 + 8
     }));
 
@@ -1255,7 +1312,6 @@
         rainDrops.forEach((p) => {
             p.y += p.speedY;
 
-            // Reset when it goes off bottom screen
             if (p.y > height + 200) {  
                 p.y = -200; 
                 p.x = Math.random() * width; 
@@ -1265,12 +1321,10 @@
 
             ctx.save();
             ctx.translate(p.x, p.y);
-            ctx.rotate(Math.PI / 2); // Rotate text to read vertically
+            ctx.rotate(Math.PI / 2);
             
             ctx.font = `300 ${p.fontSize}px 'Fira Code', monospace`;
             ctx.fillStyle = `rgba(212, 175, 55, ${p.alpha})`;
-            
-            // Add a subtle glow
             ctx.shadowBlur = 6;
             ctx.shadowColor = `rgba(212, 175, 55, ${p.alpha * 0.6})`;
             
@@ -1282,7 +1336,6 @@
     }
     
     drawGoldenMatrixRain();
-    /* ========================================================== */
 
     const mouseGlow = document.getElementById('mouse-glow');  
     const isMobile = window.innerWidth <= 768;
