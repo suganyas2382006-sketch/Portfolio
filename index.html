@@ -158,10 +158,6 @@
             z-index: 9997; opacity: 0; transition: opacity 0.5s ease; mix-blend-mode: screen;
         }  
 
-        /* ==========================================================
-           DASHBOARD HEADER:
-           Desktop: [Photo Card (Left)] [Info (Center)] [Nav Pill (Right)]
-           ========================================================== */
         .dashboard-container {  
             max-width: 1200px; 
             margin: 0 auto; 
@@ -674,7 +670,7 @@
         }
 
         /* ==========================================================
-           EDUCATION: CLEAN EDITORIAL LAYOUT (LEFT-ALIGNED)
+           ACADEMIC JOURNEY: STYLES WITH 'PRESENT' BELOW 'HIGHER ED'
            ========================================================== */
         .edu-wrapper {
             max-width: 860px;
@@ -734,7 +730,6 @@
             transform: translateY(0);
         }
 
-        /* B.Tech Left-Aligned Editorial Display (No box, No timeline) */
         .btech-clean-display {
             padding: 1.5rem 0.5rem;
             text-align: left;
@@ -745,19 +740,19 @@
             margin: 0 auto;
         }
 
-        .edu-meta-row {
+        .edu-meta-col {
             display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 0.8rem;
-            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+            margin-bottom: 0.9rem;
         }
 
         .edu-badge-tag {
             font-family: var(--font-code);
-            font-size: 0.65rem;
+            font-size: 0.68rem;
             color: var(--gold-primary);
-            letter-spacing: 0.2em;
+            letter-spacing: 0.22em;
             text-transform: uppercase;
         }
 
@@ -770,6 +765,7 @@
             border-radius: 4px;
             font-weight: 600;
             letter-spacing: 0.15em;
+            display: inline-block;
         }
 
         .edu-degree-heading {
@@ -801,15 +797,32 @@
             text-align: left;
         }
 
-        /* Timeline only inside History */
+        .history-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--gold-primary), rgba(212, 175, 55, 0.15), transparent);
+            margin: 2.5rem 0 2rem 0;
+            opacity: 0.5;
+        }
+
+        .history-section-subtitle {
+            font-family: var(--font-code);
+            font-size: 0.72rem;
+            letter-spacing: 0.25em;
+            color: var(--gold-light);
+            text-transform: uppercase;
+            margin-bottom: 1.8rem;
+            text-align: left;
+        }
+
         .timeline-container {
             position: relative;
             padding-left: 2.2rem;
-            margin-top: 0.5rem;
             display: flex;
             flex-direction: column;
             gap: 2.8rem;
             text-align: left;
+            width: 100%;
         }
 
         .timeline-container::before {
@@ -1243,6 +1256,7 @@
                 <div class="skill-category-group">
                     <span class="category-label">AI, Deep Learning & Vision</span>
                     <div class="category-pills-wrap">
+                        <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="">Python</div>
                         <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="">TensorFlow</div>
                         <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg" alt="">OpenCV</div>
                         <div class="repertoire-mini-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" alt="">Scikit-Learn</div>
@@ -1295,21 +1309,21 @@
     </section>  
 
     <!-- ==========================================================
-         PAGE: EDUCATION (LEFT-ALIGNED CLEAN EDITORIAL)
+         PAGE: ACADEMIC JOURNEY
          ========================================================== -->
     <section id="page-education" class="page">  
-        <h2 class="img-style-header reveal-element delay-1">Academic Pedigree</h2>  
+        <h2 class="img-style-header reveal-element delay-1">ACADEMIC JOURNEY</h2>  
           
         <div class="edu-wrapper reveal-element delay-2">
             <div class="edu-nav-tabs">
-                <button type="button" class="edu-tab-btn active" onclick="switchEduTab(0)">B.Tech AI & DS</button>
-                <button type="button" class="edu-tab-btn" onclick="switchEduTab(1)">History</button>
+                <button type="button" class="edu-tab-btn active" onclick="switchEduTab(0)">B.TECH AI & DS</button>
+                <button type="button" class="edu-tab-btn" onclick="switchEduTab(1)">HISTORY</button>
             </div>
 
-            <!-- PANEL 0: B.TECH (LEFT-ALIGNED, NO BOXING, NO TIMELINE) -->
+            <!-- PANEL 0: B.TECH (PRESENT STACKED BELOW HIGHER EDUCATION) -->
             <div class="edu-view-panel active" id="edu-panel-0">
                 <div class="btech-clean-display">
-                    <div class="edu-meta-row">
+                    <div class="edu-meta-col">
                         <span class="edu-badge-tag">HIGHER EDUCATION</span>
                         <span class="edu-badge-status">PRESENT</span>
                     </div>
@@ -1321,40 +1335,53 @@
                 </div>
             </div>
 
-            <!-- PANEL 1: HISTORY (NUMBERED 01 & 02 TIMELINE) -->
+            <!-- PANEL 1: HISTORY (COLLEGE DETAILS WITH PRESENT BELOW, THEN SCHOOLINGS TIMELINE) -->
             <div class="edu-view-panel" id="edu-panel-1">
-                <div class="timeline-container">
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-num-badge">01</div>
-                        <div class="timeline-content">
-                            <div class="edu-meta-row">
-                                <span class="edu-badge-tag">SECONDARY STUDIES</span>
-                                <span class="edu-badge-status" style="background: rgba(212, 175, 55, 0.2); color: var(--gold-light);">COMPLETED</span>
+                <div class="btech-clean-display">
+                    <div class="edu-meta-col">
+                        <span class="edu-badge-tag">HIGHER EDUCATION</span>
+                        <span class="edu-badge-status">PRESENT</span>
+                    </div>
+                    <h3 class="edu-degree-heading">B.Tech Artificial Intelligence & Data Science</h3>
+                    <div class="edu-institution-title">JP College of Engineering (JPCOE), Tenkasi — Anna University[span_1](start_span)[span_1](end_span)</div>
+                    <p class="edu-desc-text">
+                        Building robust theoretical and practical foundations in advanced neural network architectures, predictive modeling, machine learning pipelines, and scalable data systems.
+                    </p>
+
+                    <div class="history-divider"></div>
+                    <div class="history-section-subtitle">Schoolings Timeline</div>
+
+                    <div class="timeline-container">
+                        <div class="timeline-item">
+                            <div class="timeline-num-badge">01</div>
+                            <div class="timeline-content">
+                                <div class="edu-meta-col">
+                                    <span class="edu-badge-tag">SECONDARY STUDIES</span>
+                                    <span class="edu-badge-status" style="background: rgba(212, 175, 55, 0.2); color: var(--gold-light);">COMPLETED</span>
+                                </div>
+                                <h3 class="edu-degree-heading">Higher Secondary Education</h3>
+                                <div class="edu-institution-title">TMT Manjammal Girls Govt HR Sec School, Tenkasi</div>
+                                <p class="edu-desc-text">
+                                    Rigorous specialized coursework focusing on advanced mathematics, analytical physics, and foundational computer logic systems.
+                                </p>
                             </div>
-                            <h3 class="edu-degree-heading">Higher Secondary Education</h3>
-                            <div class="edu-institution-title">TMT Manjammal Girls Govt HR Sec School, Tenkasi</div>
-                            <p class="edu-desc-text">
-                                Rigorous specialized coursework focusing on advanced mathematics, analytical physics, and foundational computer logic systems.
-                            </p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-num-badge">02</div>
+                            <div class="timeline-content">
+                                <div class="edu-meta-col">
+                                    <span class="edu-badge-tag">FOUNDATIONAL ROOTS</span>
+                                    <span class="edu-badge-status" style="background: rgba(212, 175, 55, 0.2); color: var(--gold-light);">COMPLETED</span>
+                                </div>
+                                <h3 class="edu-degree-heading">Matriculation</h3>
+                                <div class="edu-institution-title">St. John's Matric HR Sec School, Tenkasi</div>
+                                <p class="edu-desc-text">
+                                    Core foundation in analytical science, mathematics, and logical reasoning.
+                                </p>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-num-badge">02</div>
-                        <div class="timeline-content">
-                            <div class="edu-meta-row">
-                                <span class="edu-badge-tag">FOUNDATIONAL ROOTS</span>
-                                <span class="edu-badge-status" style="background: rgba(212, 175, 55, 0.2); color: var(--gold-light);">COMPLETED</span>
-                            </div>
-                            <h3 class="edu-degree-heading">Matriculation</h3>
-                            <div class="edu-institution-title">St. John's Matric HR Sec School, Tenkasi</div>
-                            <p class="edu-desc-text">
-                                Core foundation in analytical science, mathematics, and logical reasoning.
-                            </p>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -1371,7 +1398,7 @@
                         <div class="scroll-card-tag">AI & VISION</div>
                         <h3 class="scroll-card-title">NeuroVision AI</h3>  
                         <div class="title-gold-line"></div>
-                        <p class="scroll-card-desc">AI-powered MRI analysis combining deep learning classification, clinical interpretability, and attention map heatmaps.[span_1](start_span)[span_1](end_span)</p>  
+                        <p class="scroll-card-desc">AI-powered MRI analysis combining deep learning classification, clinical interpretability, and attention map heatmaps.[span_2](start_span)[span_2](end_span)</p>  
                         <button type="button" class="view-result-btn" onclick="event.stopPropagation(); openModal('assets/image2.jpg')">
                             <span>View Result</span>
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
@@ -1389,7 +1416,7 @@
                         <div class="scroll-card-tag">CLUSTERING</div>
                         <h3 class="scroll-card-title">Customer Segmentation</h3>  
                         <div class="title-gold-line"></div>
-                        <p class="scroll-card-desc">Segment customers based on behavior and demographics with actionable insights and demographic distribution.[span_2](start_span)[span_2](end_span)</p>  
+                        <p class="scroll-card-desc">Segment customers based on behavior and demographics with actionable insights and demographic distribution.[span_3](start_span)[span_3](end_span)</p>  
                         <button type="button" class="view-result-btn" onclick="event.stopPropagation(); openModal('assets/image5.jpg')">
                             <span>View Result</span>
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
@@ -1424,7 +1451,7 @@
                         <div class="scroll-card-tag">MODELING</div>
                         <h3 class="scroll-card-title">Predictive Analytics Using Historical Data</h3>  
                         <div class="title-gold-line"></div>
-                        <p class="scroll-card-desc">Build a predictive model to forecast future trends using time-series forecast and historical records.[span_3](start_span)[span_3](end_span)</p>  
+                        <p class="scroll-card-desc">Build a predictive model to forecast future trends using time-series forecast and historical records.[span_4](start_span)[span_4](end_span)</p>  
                         <button type="button" class="view-result-btn" onclick="event.stopPropagation(); openModal('assets/image4.jpg')">
                             <span>View Result</span>
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
@@ -1441,7 +1468,7 @@
                         <div class="scroll-card-tag">ANALYTICS</div>
                         <h3 class="scroll-card-title">Sales & Revenue Analysis Dashboard</h3>  
                         <div class="title-gold-line"></div>
-                        <p class="scroll-card-desc">Build a dashboard to analyze sales and revenue data with performance trends and category insights.[span_4](start_span)[span_4](end_span)</p>  
+                        <p class="scroll-card-desc">Build a dashboard to analyze sales and revenue data with performance trends and category insights.[span_5](start_span)[span_5](end_span)</p>  
                         <button type="button" class="view-result-btn" onclick="event.stopPropagation(); openModal('assets/image6.jpg')">
                             <span>View Result</span>
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
@@ -1458,7 +1485,7 @@
                         <div class="scroll-card-tag">AUTOMATION</div>
                         <h3 class="scroll-card-title">Data Cleaning & Reporting Automation</h3>  
                         <div class="title-gold-line"></div>
-                        <p class="scroll-card-desc">Automate data cleaning and reporting workflows to handle missing values, duplicates, and workflow status.[span_5](start_span)[span_5](end_span)</p>  
+                        <p class="scroll-card-desc">Automate data cleaning and reporting workflows to handle missing values, duplicates, and workflow status.[span_6](start_span)[span_6](end_span)</p>  
                         <button type="button" class="view-result-btn" onclick="event.stopPropagation(); openModal('assets/image3.jpg')">
                             <span>View Result</span>
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
@@ -1488,7 +1515,7 @@
         <div class="resume-card reveal-element delay-1">  
             <h2 class="img-style-header" style="justify-content: center; margin-bottom: 1rem;">Initiate Contact</h2>  
             <p style="color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; font-weight: 300; max-width: 550px; margin: 0 auto;">  
-                Open to discussing architectural AI solutions, data infrastructure, and professional collaborations. Connect with me directly or review my dossier.[span_6](start_span)[span_6](end_span)
+                Open to discussing architectural AI solutions, data infrastructure, and professional collaborations. Connect with me directly or review my dossier.[span_7](start_span)[span_7](end_span)
             </p>  
             
             <div class="social-row">  
